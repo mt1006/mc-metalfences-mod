@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    {
+      "id": "#metalfences:metal_fence_gates",
+      "required": false
+    }
+  ]
+}

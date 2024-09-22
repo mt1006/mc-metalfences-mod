@@ -1,0 +1,24 @@
+plugins
+{
+	id "net.minecraftforge.gradle" version "${forge_gradle_version}"
+}
+
+minecraft
+{
+	mappings channel: "official", version: minecraft_version
+
+	runs
+	{
+		client
+		server
+	}
+}
+
+dependencies
+{
+	minecraft "net.minecraftforge:forge:${minecraft_version}-${forge_version}"
+	implementation("net.sf.jopt-simple:jopt-simple:5.0.4") { version { strictly "5.0.4" } }
+}
+
+processResources { from project(":fabric").file("src/main/generated") }
+jar { exclude ".cache" }
