@@ -1,0 +1,26 @@
+{
+  "block.metalfences.iron_fence": "Żelazny płot",
+  "block.metalfences.iron_fence_gate": "Żelazna furtka",
+
+  "block.metalfences.copper_fence": "Miedziany płot",
+  "block.metalfences.exposed_copper_fence": "Zwietrzały miedziany płot",
+  "block.metalfences.weathered_copper_fence": "Zaśniedziały miedziany płot",
+  "block.metalfences.oxidized_copper_fence": "Utleniony miedziany płot",
+
+  "block.metalfences.waxed_copper_fence": "Woskowany miedziany płot",
+  "block.metalfences.waxed_exposed_copper_fence": "Woskowany zwietrzały miedziany płot",
+  "block.metalfences.waxed_weathered_copper_fence": "Woskowany zaśniedziały miedziany płot",
+  "block.metalfences.waxed_oxidized_copper_fence": "Woskowany utleniony miedziany płot",
+
+  "block.metalfences.copper_fence_gate": "Miedziana furtka",
+  "block.metalfences.exposed_copper_fence_gate": "Zwietrzała miedziana furtka",
+  "block.metalfences.weathered_copper_fence_gate": "Zaśniedziała miedziana furtka",
+  "block.metalfences.oxidized_copper_fence_gate": "Utleniona miedziana furtka",
+
+  "block.metalfences.waxed_copper_fence_gate": "Woskowana miedziana furtka",
+  "block.metalfences.waxed_exposed_copper_fence_gate": "Woskowana zwietrzała miedziana furtka",
+  "block.metalfences.waxed_weathered_copper_fence_gate": "Woskowana zaśniedziała miedziana furtka",
+  "block.metalfences.waxed_oxidized_copper_fence_gate": "Woskowana utleniona miedziana furtka",
+
+  "modmenu.descriptionTranslation.metalfences": "Dodaje żelazne i miedziane warianty płotów i furtek."
+}
