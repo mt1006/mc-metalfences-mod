@@ -1,0 +1,24 @@
+{
+  "block.metalfences.iron_fence": "Iron Fence",
+  "block.metalfences.iron_fence_gate": "Iron Fence Gate",
+
+  "block.metalfences.copper_fence": "Copper Fence",
+  "block.metalfences.exposed_copper_fence": "Exposed Copper Fence",
+  "block.metalfences.weathered_copper_fence": "Weathered Copper Fence",
+  "block.metalfences.oxidized_copper_fence": "Oxidized Copper Fence",
+
+  "block.metalfences.waxed_copper_fence": "Waxed Copper Fence",
+  "block.metalfences.waxed_exposed_copper_fence": "Waxed Exposed Copper Fence",
+  "block.metalfences.waxed_weathered_copper_fence": "Waxed Weathered Copper Fence",
+  "block.metalfences.waxed_oxidized_copper_fence": "Waxed Oxidized Copper Fence",
+
+  "block.metalfences.copper_fence_gate": "Copper Fence Gate",
+  "block.metalfences.exposed_copper_fence_gate": "Exposed Copper Fence Gate",
+  "block.metalfences.weathered_copper_fence_gate": "Weathered Copper Fence Gate",
+  "block.metalfences.oxidized_copper_fence_gate": "Oxidized Copper Fence Gate",
+
+  "block.metalfences.waxed_copper_fence_gate": "Waxed Copper Fence Gate",
+  "block.metalfences.waxed_exposed_copper_fence_gate": "Waxed Exposed Copper Fence Gate",
+  "block.metalfences.waxed_weathered_copper_fence_gate": "Waxed Weathered Copper Fence Gate",
+  "block.metalfences.waxed_oxidized_copper_fence_gate": "Waxed Oxidized Copper Fence Gate"
+}
