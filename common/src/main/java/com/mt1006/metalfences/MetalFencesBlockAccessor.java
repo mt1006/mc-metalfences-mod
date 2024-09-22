@@ -36,7 +36,7 @@ public abstract class MetalFencesBlockAccessor
 	}
 
 	public static @Nullable ItemInteractionResult useItemOnWeathering(ItemStack itemStack, BlockState blockState, Level level,
-																	  lockPos blockPos, Player player, InteractionHand hand)
+																	  BlockPos blockPos, Player player, InteractionHand hand)
 	{
 		if (ACCESSOR == null) { throw new RuntimeException(); }
 		Block block = blockState.getBlock();
