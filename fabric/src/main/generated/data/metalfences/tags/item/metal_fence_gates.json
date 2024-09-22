@@ -1,0 +1,9 @@
+{
+  "values": [
+    "metalfences:iron_fence_gate",
+    {
+      "id": "#metalfences:copper_fence_gates",
+      "required": false
+    }
+  ]
+}

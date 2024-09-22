@@ -1,0 +1,10 @@
+// 1.21.1	2024-09-22T23:13:42.156441831	Metal Fences/Tags for minecraft:block
+c20c7317753d37096ac0e0f9291aaaa828d532ad data/metalfences/tags/block/copper_fences.json
+18d48c3f1362ed0739d69dee6cde9ce584bb3611 data/metalfences/tags/block/metal_fences.json
+5dd7bcce7bb9d14155160fa042b83b8222c43ae9 data/minecraft/tags/block/needs_stone_tool.json
+205ec2f0b0474263335d73618018db954a463147 data/metalfences/tags/block/metal_fence_gates.json
+ce3c72bcd8cbdfe217baee230d9b8b515f58b787 data/minecraft/tags/block/mineable/pickaxe.json
+5e634226f718db7e039c7623f9f1b6cab6ec005b data/metalfences/tags/block/copper_fence_gates.json
+0408a4d5cf5dfedda85549555df97f20d62db476 data/minecraft/tags/block/fence_gates.json
+f5f172c59e560d2530e7d41e0f966ad1e5853b5a data/irondoorkey/tags/block/openable.json
+6f05451ab9e249d294c4dada9d9aa11e1342e12f data/minecraft/tags/block/fences.json

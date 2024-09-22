@@ -1,0 +1,12 @@
+{
+  "values": [
+    "metalfences:copper_fence",
+    "metalfences:exposed_copper_fence",
+    "metalfences:weathered_copper_fence",
+    "metalfences:oxidized_copper_fence",
+    "metalfences:waxed_copper_fence",
+    "metalfences:waxed_exposed_copper_fence",
+    "metalfences:waxed_weathered_copper_fence",
+    "metalfences:waxed_oxidized_copper_fence"
+  ]
+}
