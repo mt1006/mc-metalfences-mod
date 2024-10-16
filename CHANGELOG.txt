@@ -1,0 +1,2 @@
+===Version 1.0.1===
+-Removed minimum loader version requirement for Forge and NeoForge - version for NeoForge 1.21.1 now supports 1.21, and version for Forge 1.20.1 now supports 1.20.
