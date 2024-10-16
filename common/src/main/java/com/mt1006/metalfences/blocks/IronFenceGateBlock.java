@@ -21,7 +21,7 @@ public class IronFenceGateBlock extends FenceGateBlock
 
 	public IronFenceGateBlock(Properties properties)
 	{
-		super(properties, MATERIAL);
+		super(MATERIAL, properties);
 	}
 
 	@Override public @NotNull InteractionResult use(BlockState blockState, Level level, BlockPos blockPos,

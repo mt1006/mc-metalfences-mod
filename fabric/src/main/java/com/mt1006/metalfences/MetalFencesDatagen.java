@@ -16,8 +16,8 @@ import net.minecraft.data.models.ItemModelGenerators;
 import net.minecraft.data.models.model.ModelTemplates;
 import net.minecraft.data.models.model.TextureMapping;
 import net.minecraft.data.models.model.TextureSlot;
-import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.data.recipes.RecipeCategory;
+import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.data.recipes.ShapedRecipeBuilder;
 import net.minecraft.data.recipes.ShapelessRecipeBuilder;
 import net.minecraft.resources.ResourceLocation;
@@ -31,7 +31,6 @@ import net.minecraft.world.level.block.Blocks;
 
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
-import java.util.function.Consumer;
 
 public class MetalFencesDatagen implements DataGeneratorEntrypoint
 {
@@ -90,31 +89,31 @@ public class MetalFencesDatagen implements DataGeneratorEntrypoint
 			super(output);
 		}
 
-		@Override public void buildRecipes(Consumer<FinishedRecipe> exporter)
+		@Override public void buildRecipes(RecipeOutput output)
 		{
 			ShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS, MetalFencesMod.IRON_FENCE)
 					.define('#', Items.IRON_INGOT).define('-', Items.IRON_NUGGET)
 					.pattern("#-#").pattern("#-#")
 					.unlockedBy("has_iron_ingot", has(Items.IRON_INGOT))
-					.save(exporter);
+					.save(output);
 
 			ShapedRecipeBuilder.shaped(RecipeCategory.REDSTONE, MetalFencesMod.IRON_FENCE_GATE)
 					.define('#', Items.IRON_INGOT).define('-', Items.IRON_NUGGET)
 					.pattern("-#-").pattern("-#-")
 					.unlockedBy("has_iron_ingot", has(Items.IRON_INGOT))
-					.save(exporter);
+					.save(output);
 
 			ShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS, MetalFencesMod.COPPER_FENCE)
 					.define('#', Items.COPPER_INGOT).define('/', Items.STICK)
 					.pattern("#/#").pattern("#/#")
 					.unlockedBy("has_copper_ingot", has(Items.COPPER_INGOT))
-					.save(exporter);
+					.save(output);
 
 			ShapedRecipeBuilder.shaped(RecipeCategory.REDSTONE, MetalFencesMod.COPPER_FENCE_GATE)
 					.define('#', Items.COPPER_INGOT).define('/', Items.STICK)
 					.pattern("/#/").pattern("/#/")
 					.unlockedBy("has_copper_ingot", has(Items.COPPER_INGOT))
-					.save(exporter);
+					.save(output);
 
 			for (int i = 0; i < 4; i++)
 			{
@@ -122,13 +121,13 @@ public class MetalFencesDatagen implements DataGeneratorEntrypoint
 						.requires(WEATHERING_COPPER_FENCES.get(i))
 						.requires(Items.HONEYCOMB)
 						.unlockedBy("has_copper_fence", has(WEATHERING_COPPER_FENCES.get(i)))
-						.save(exporter);
+						.save(output);
 
 				ShapelessRecipeBuilder.shapeless(RecipeCategory.REDSTONE, WAXED_COPPER_FENCE_GATES.get(i))
 						.requires(WEATHERING_COPPER_FENCE_GATES.get(i))
 						.requires(Items.HONEYCOMB)
 						.unlockedBy("has_copper_fence", has(WEATHERING_COPPER_FENCE_GATES.get(i)))
-						.save(exporter);
+						.save(output);
 			}
 		}
 	}

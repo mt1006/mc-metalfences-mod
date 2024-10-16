@@ -29,13 +29,13 @@ public class WeatheringCopperFenceGateBlock extends FenceGateBlock implements We
 
 	public WeatheringCopperFenceGateBlock(WeatherState weatherState, Properties properties)
 	{
-		super(properties, MATERIAL);
+		super(MATERIAL, properties);
 		this.weatherState = weatherState;
 	}
 
 	@Override public void randomTick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random)
 	{
-		onRandomTick(state, level, pos, random);
+		changeOverTime(state, level, pos, random);
 	}
 
 	@Override public boolean isRandomlyTicking(BlockState state)

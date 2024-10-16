@@ -33,22 +33,22 @@ public class MetalFencesMod extends MetalFencesBlockAccessor implements ModIniti
 
 	public static final Block COPPER_FENCE = new WeatheringCopperFenceBlock(WeatheringCopper.WeatherState.UNAFFECTED,
 			BlockBehaviour.Properties.of().mapColor(Blocks.COPPER_BLOCK.defaultMapColor()).strength(3.0f, 6.0f).requiresCorrectToolForDrops().sound(SoundType.COPPER));
-	public static final Block EXPOSED_COPPER_FENCE = new WeatheringCopperFenceBlock(WeatheringCopper.WeatherState.EXPOSED, BlockBehaviour.Properties.copy(COPPER_FENCE));
-	public static final Block WEATHERED_COPPER_FENCE = new WeatheringCopperFenceBlock(WeatheringCopper.WeatherState.WEATHERED, BlockBehaviour.Properties.copy(COPPER_FENCE));
-	public static final Block OXIDIZED_COPPER_FENCE = new WeatheringCopperFenceBlock(WeatheringCopper.WeatherState.OXIDIZED, BlockBehaviour.Properties.copy(COPPER_FENCE));
-	public static final Block WAXED_COPPER_FENCE = new WaxedCopperFenceBlock(BlockBehaviour.Properties.copy(COPPER_FENCE));
-	public static final Block WAXED_EXPOSED_COPPER_FENCE = new WaxedCopperFenceBlock(BlockBehaviour.Properties.copy(COPPER_FENCE));
-	public static final Block WAXED_WEATHERED_COPPER_FENCE = new WaxedCopperFenceBlock(BlockBehaviour.Properties.copy(COPPER_FENCE));
-	public static final Block WAXED_OXIDIZED_COPPER_FENCE = new WaxedCopperFenceBlock(BlockBehaviour.Properties.copy(COPPER_FENCE));
+	public static final Block EXPOSED_COPPER_FENCE = new WeatheringCopperFenceBlock(WeatheringCopper.WeatherState.EXPOSED, BlockBehaviour.Properties.ofFullCopy(COPPER_FENCE));
+	public static final Block WEATHERED_COPPER_FENCE = new WeatheringCopperFenceBlock(WeatheringCopper.WeatherState.WEATHERED, BlockBehaviour.Properties.ofFullCopy(COPPER_FENCE));
+	public static final Block OXIDIZED_COPPER_FENCE = new WeatheringCopperFenceBlock(WeatheringCopper.WeatherState.OXIDIZED, BlockBehaviour.Properties.ofFullCopy(COPPER_FENCE));
+	public static final Block WAXED_COPPER_FENCE = new WaxedCopperFenceBlock(BlockBehaviour.Properties.ofFullCopy(COPPER_FENCE));
+	public static final Block WAXED_EXPOSED_COPPER_FENCE = new WaxedCopperFenceBlock(BlockBehaviour.Properties.ofFullCopy(COPPER_FENCE));
+	public static final Block WAXED_WEATHERED_COPPER_FENCE = new WaxedCopperFenceBlock(BlockBehaviour.Properties.ofFullCopy(COPPER_FENCE));
+	public static final Block WAXED_OXIDIZED_COPPER_FENCE = new WaxedCopperFenceBlock(BlockBehaviour.Properties.ofFullCopy(COPPER_FENCE));
 
-	public static final Block COPPER_FENCE_GATE = new WeatheringCopperFenceGateBlock(WeatheringCopper.WeatherState.UNAFFECTED, BlockBehaviour.Properties.copy(COPPER_FENCE));
-	public static final Block EXPOSED_COPPER_FENCE_GATE = new WeatheringCopperFenceGateBlock(WeatheringCopper.WeatherState.EXPOSED, BlockBehaviour.Properties.copy(COPPER_FENCE));
-	public static final Block WEATHERED_COPPER_FENCE_GATE = new WeatheringCopperFenceGateBlock(WeatheringCopper.WeatherState.WEATHERED, BlockBehaviour.Properties.copy(COPPER_FENCE));
-	public static final Block OXIDIZED_COPPER_FENCE_GATE = new WeatheringCopperFenceGateBlock(WeatheringCopper.WeatherState.OXIDIZED, BlockBehaviour.Properties.copy(COPPER_FENCE));
-	public static final Block WAXED_COPPER_FENCE_GATE = new WaxedCopperFenceGateBlock(BlockBehaviour.Properties.copy(COPPER_FENCE));
-	public static final Block WAXED_EXPOSED_COPPER_FENCE_GATE = new WaxedCopperFenceGateBlock(BlockBehaviour.Properties.copy(COPPER_FENCE));
-	public static final Block WAXED_WEATHERED_COPPER_FENCE_GATE = new WaxedCopperFenceGateBlock(BlockBehaviour.Properties.copy(COPPER_FENCE));
-	public static final Block WAXED_OXIDIZED_COPPER_FENCE_GATE = new WaxedCopperFenceGateBlock(BlockBehaviour.Properties.copy(COPPER_FENCE));
+	public static final Block COPPER_FENCE_GATE = new WeatheringCopperFenceGateBlock(WeatheringCopper.WeatherState.UNAFFECTED, BlockBehaviour.Properties.ofFullCopy(COPPER_FENCE));
+	public static final Block EXPOSED_COPPER_FENCE_GATE = new WeatheringCopperFenceGateBlock(WeatheringCopper.WeatherState.EXPOSED, BlockBehaviour.Properties.ofFullCopy(COPPER_FENCE));
+	public static final Block WEATHERED_COPPER_FENCE_GATE = new WeatheringCopperFenceGateBlock(WeatheringCopper.WeatherState.WEATHERED, BlockBehaviour.Properties.ofFullCopy(COPPER_FENCE));
+	public static final Block OXIDIZED_COPPER_FENCE_GATE = new WeatheringCopperFenceGateBlock(WeatheringCopper.WeatherState.OXIDIZED, BlockBehaviour.Properties.ofFullCopy(COPPER_FENCE));
+	public static final Block WAXED_COPPER_FENCE_GATE = new WaxedCopperFenceGateBlock(BlockBehaviour.Properties.ofFullCopy(COPPER_FENCE));
+	public static final Block WAXED_EXPOSED_COPPER_FENCE_GATE = new WaxedCopperFenceGateBlock(BlockBehaviour.Properties.ofFullCopy(COPPER_FENCE));
+	public static final Block WAXED_WEATHERED_COPPER_FENCE_GATE = new WaxedCopperFenceGateBlock(BlockBehaviour.Properties.ofFullCopy(COPPER_FENCE));
+	public static final Block WAXED_OXIDIZED_COPPER_FENCE_GATE = new WaxedCopperFenceGateBlock(BlockBehaviour.Properties.ofFullCopy(COPPER_FENCE));
 
 
 	public static final Item IRON_FENCE_ITEM = new BlockItem(IRON_FENCE, new Item.Properties());

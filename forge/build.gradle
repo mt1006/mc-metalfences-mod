@@ -21,3 +21,10 @@ dependencies
 
 processResources { from project(":fabric").file("src/main/generated") }
 jar { exclude ".cache" }
+
+sourceSets.each
+{
+	def dir = layout.buildDirectory.dir("sourcesSets/$it.name")
+	it.output.resourcesDir = dir
+	it.java.destinationDirectory = dir
+}

@@ -1,7 +1,7 @@
-// 1.20.1	2024-09-22T23:17:57.16291906	Metal Fences/Tags for minecraft:item
-952c1f0f34a3fd0e4d51a9dc9aee1a2bd577a5eb data/metalfences/tags/items/copper_fences.json
+// 1.20.4	2024-10-16T22:42:13.326591299	Metal Fences/Tags for minecraft:item
 c7aa61d5bb4fa9aadacfb6a7c2ce47f43d73a4fb data/metalfences/tags/items/copper_fence_gates.json
 0b1429b345e42e233fb3461400be434192056c50 data/metalfences/tags/items/metal_fence_gates.json
-7ef2fdbcc90ef23320a2ac2a790406b1e4cb8b9e data/metalfences/tags/items/metal_fences.json
 3b634f8422e61abd0a3323ba5533c81bebe3d4f4 data/minecraft/tags/items/fences.json
 476c7b0506711ebfa20a090f46c4ac686352c6f1 data/minecraft/tags/items/fence_gates.json
+7ef2fdbcc90ef23320a2ac2a790406b1e4cb8b9e data/metalfences/tags/items/metal_fences.json
+952c1f0f34a3fd0e4d51a9dc9aee1a2bd577a5eb data/metalfences/tags/items/copper_fences.json

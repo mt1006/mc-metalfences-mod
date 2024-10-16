@@ -22,14 +22,13 @@
   },
   "requirements": [
     [
-      "has_copper_fence",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_copper_fence"
     ]
   ],
   "rewards": {
     "recipes": [
       "metalfences:waxed_weathered_copper_fence"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

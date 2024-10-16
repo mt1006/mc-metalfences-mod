@@ -15,7 +15,7 @@ public class WaxedCopperFenceGateBlock extends FenceGateBlock
 {
 	public WaxedCopperFenceGateBlock(Properties properties)
 	{
-		super(properties, WeatheringCopperFenceGateBlock.MATERIAL);
+		super(WeatheringCopperFenceGateBlock.MATERIAL, properties);
 	}
 
 	@Override public @NotNull InteractionResult use(BlockState blockState, Level level, BlockPos blockPos,

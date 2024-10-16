@@ -29,7 +29,7 @@ public class WeatheringCopperFenceBlock extends FenceBlock implements Weathering
 
 	@Override public void randomTick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random)
 	{
-		onRandomTick(state, level, pos, random);
+		changeOverTime(state, level, pos, random);
 	}
 
 	@Override public boolean isRandomlyTicking(BlockState state)
