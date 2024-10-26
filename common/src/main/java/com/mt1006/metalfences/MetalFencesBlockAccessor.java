@@ -7,7 +7,7 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.stats.Stats;
 import net.minecraft.world.InteractionHand;
-import net.minecraft.world.ItemInteractionResult;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.AxeItem;
@@ -35,8 +35,8 @@ public abstract class MetalFencesBlockAccessor
 		return ACCESSOR.getNextWeathered(block);
 	}
 
-	public static @Nullable ItemInteractionResult useItemOnWeathering(ItemStack itemStack, BlockState blockState, Level level,
-																	  BlockPos blockPos, Player player, InteractionHand hand)
+	public static @Nullable InteractionResult useItemOnWeathering(ItemStack itemStack, BlockState blockState, Level level,
+																  BlockPos blockPos, Player player, InteractionHand hand)
 	{
 		if (ACCESSOR == null) { throw new RuntimeException(); }
 		Block block = blockState.getBlock();
@@ -58,7 +58,7 @@ public abstract class MetalFencesBlockAccessor
 			level.levelEvent(player, LevelEvent.PARTICLES_AND_SOUND_WAX_ON, blockPos, 0);
 
 			player.awardStat(Stats.ITEM_USED.get(itemStack.getItem()));
-			return ItemInteractionResult.sidedSuccess(level.isClientSide);
+			return InteractionResult.SUCCESS;
 		}
 		else if (itemStack.getItem() instanceof AxeItem)
 		{
@@ -79,13 +79,13 @@ public abstract class MetalFencesBlockAccessor
 
 			itemStack.hurtAndBreak(1, player, LivingEntity.getSlotForHand(hand));
 			player.awardStat(Stats.ITEM_USED.get(itemStack.getItem()));
-			return ItemInteractionResult.sidedSuccess(level.isClientSide);
+			return InteractionResult.SUCCESS;
 		}
 
 		return null;
 	}
 
-	public static @Nullable ItemInteractionResult useItemOnWaxed(ItemStack itemStack, BlockState blockState, Level level,
+	public static @Nullable InteractionResult useItemOnWaxed(ItemStack itemStack, BlockState blockState, Level level,
 																 BlockPos blockPos, Player player, InteractionHand hand)
 	{
 		if (ACCESSOR == null) { throw new RuntimeException(); }
@@ -108,7 +108,7 @@ public abstract class MetalFencesBlockAccessor
 
 			itemStack.hurtAndBreak(1, player, LivingEntity.getSlotForHand(hand));
 			player.awardStat(Stats.ITEM_USED.get(itemStack.getItem()));
-			return ItemInteractionResult.sidedSuccess(level.isClientSide);
+			return InteractionResult.SUCCESS;
 		}
 		return null;
 	}

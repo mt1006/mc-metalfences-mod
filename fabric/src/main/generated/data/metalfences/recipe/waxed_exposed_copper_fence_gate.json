@@ -2,12 +2,8 @@
   "type": "minecraft:crafting_shapeless",
   "category": "redstone",
   "ingredients": [
-    {
-      "item": "metalfences:exposed_copper_fence_gate"
-    },
-    {
-      "item": "minecraft:honeycomb"
-    }
+    "metalfences:exposed_copper_fence_gate",
+    "minecraft:honeycomb"
   ],
   "result": {
     "count": 1,

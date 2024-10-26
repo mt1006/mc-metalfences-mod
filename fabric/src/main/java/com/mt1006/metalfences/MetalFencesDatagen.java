@@ -16,10 +16,7 @@ import net.minecraft.data.models.ItemModelGenerators;
 import net.minecraft.data.models.model.ModelTemplates;
 import net.minecraft.data.models.model.TextureMapping;
 import net.minecraft.data.models.model.TextureSlot;
-import net.minecraft.data.recipes.RecipeCategory;
-import net.minecraft.data.recipes.RecipeOutput;
-import net.minecraft.data.recipes.ShapedRecipeBuilder;
-import net.minecraft.data.recipes.ShapelessRecipeBuilder;
+import net.minecraft.data.recipes.*;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.ItemTags;
@@ -28,6 +25,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
@@ -89,27 +87,45 @@ public class MetalFencesDatagen implements DataGeneratorEntrypoint
 			super(output, registriesFuture);
 		}
 
-		@Override public void buildRecipes(RecipeOutput output)
+		@Override protected RecipeProvider createRecipeProvider(HolderLookup.Provider provider, RecipeOutput recipeOutput)
 		{
-			ShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS, MetalFencesMod.IRON_FENCE)
+			return new RecipeBuilder(provider, recipeOutput);
+		}
+
+		@Override public @NotNull String getName()
+		{
+			return "Metal Fences Recipe Provider";
+		}
+	}
+
+	private static class RecipeBuilder extends RecipeProvider
+	{
+		public RecipeBuilder(HolderLookup.Provider provider, RecipeOutput recipeOutput)
+		{
+			super(provider, recipeOutput);
+		}
+
+		@Override public void buildRecipes()
+		{
+			shaped(RecipeCategory.DECORATIONS, MetalFencesMod.IRON_FENCE)
 					.define('#', Items.IRON_INGOT).define('-', Items.IRON_NUGGET)
 					.pattern("#-#").pattern("#-#")
 					.unlockedBy("has_iron_ingot", has(Items.IRON_INGOT))
 					.save(output);
 
-			ShapedRecipeBuilder.shaped(RecipeCategory.REDSTONE, MetalFencesMod.IRON_FENCE_GATE)
+			shaped(RecipeCategory.REDSTONE, MetalFencesMod.IRON_FENCE_GATE)
 					.define('#', Items.IRON_INGOT).define('-', Items.IRON_NUGGET)
 					.pattern("-#-").pattern("-#-")
 					.unlockedBy("has_iron_ingot", has(Items.IRON_INGOT))
 					.save(output);
 
-			ShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS, MetalFencesMod.COPPER_FENCE)
+			shaped(RecipeCategory.DECORATIONS, MetalFencesMod.COPPER_FENCE)
 					.define('#', Items.COPPER_INGOT).define('/', Items.STICK)
 					.pattern("#/#").pattern("#/#")
 					.unlockedBy("has_copper_ingot", has(Items.COPPER_INGOT))
 					.save(output);
 
-			ShapedRecipeBuilder.shaped(RecipeCategory.REDSTONE, MetalFencesMod.COPPER_FENCE_GATE)
+			shaped(RecipeCategory.REDSTONE, MetalFencesMod.COPPER_FENCE_GATE)
 					.define('#', Items.COPPER_INGOT).define('/', Items.STICK)
 					.pattern("/#/").pattern("/#/")
 					.unlockedBy("has_copper_ingot", has(Items.COPPER_INGOT))
@@ -117,13 +133,13 @@ public class MetalFencesDatagen implements DataGeneratorEntrypoint
 
 			for (int i = 0; i < 4; i++)
 			{
-				ShapelessRecipeBuilder.shapeless(RecipeCategory.DECORATIONS, WAXED_COPPER_FENCES.get(i))
+				shapeless(RecipeCategory.DECORATIONS, WAXED_COPPER_FENCES.get(i))
 						.requires(WEATHERING_COPPER_FENCES.get(i))
 						.requires(Items.HONEYCOMB)
 						.unlockedBy("has_copper_fence", has(WEATHERING_COPPER_FENCES.get(i)))
 						.save(output);
 
-				ShapelessRecipeBuilder.shapeless(RecipeCategory.REDSTONE, WAXED_COPPER_FENCE_GATES.get(i))
+				shapeless(RecipeCategory.REDSTONE, WAXED_COPPER_FENCE_GATES.get(i))
 						.requires(WEATHERING_COPPER_FENCE_GATES.get(i))
 						.requires(Items.HONEYCOMB)
 						.unlockedBy("has_copper_fence", has(WEATHERING_COPPER_FENCE_GATES.get(i)))
@@ -201,11 +217,11 @@ public class MetalFencesDatagen implements DataGeneratorEntrypoint
 			COPPER_FENCE_GATES.forEach((block) -> copperFenceGateItems.add(block.asItem()));
 
 			FabricTagBuilder metalFenceItems = getOrCreateTagBuilder(METAL_FENCE_ITEMS);
-			metalFenceItems.add(MetalFencesMod.IRON_FENCE_ITEM);
+			metalFenceItems.add(MetalFencesMod.IRON_FENCE.asItem());
 			metalFenceItems.addOptionalTag(COPPER_FENCE_ITEMS);
 
 			FabricTagBuilder metalFenceGateItems = getOrCreateTagBuilder(METAL_FENCE_GATE_ITEMS);
-			metalFenceGateItems.add(MetalFencesMod.IRON_FENCE_GATE_ITEM);
+			metalFenceGateItems.add(MetalFencesMod.IRON_FENCE_GATE.asItem());
 			metalFenceGateItems.addOptionalTag(COPPER_FENCE_GATE_ITEMS);
 
 			getOrCreateTagBuilder(ItemTags.FENCES).addOptionalTag(METAL_FENCE_ITEMS);

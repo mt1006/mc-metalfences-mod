@@ -4,6 +4,9 @@ import com.google.common.collect.BiMap;
 import com.google.common.collect.ImmutableBiMap;
 import com.mojang.datafixers.util.Pair;
 import com.mt1006.metalfences.blocks.*;
+import net.minecraft.core.Registry;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.*;
 import net.minecraft.world.level.block.*;
@@ -22,6 +25,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.function.Function;
 import java.util.function.Supplier;
 
 @Mod(MetalFencesMod.MOD_ID)
@@ -35,29 +39,28 @@ public class MetalFencesMod extends MetalFencesBlockAccessor
 	private static final List<Pair<RegistryObject<Item>, Item>> creativeTabPairs = new ArrayList<>();
 
 
-	public static final RegistryObject<Block> IRON_FENCE = register("iron_fence", () -> new FenceBlock(
-			BlockBehaviour.Properties.of().mapColor(MapColor.METAL).requiresCorrectToolForDrops().strength(4.0f, 5.0f).sound(SoundType.METAL)), Items.IRON_DOOR);
-	public static final RegistryObject<Block> IRON_FENCE_GATE = register("iron_fence_gate", () -> new IronFenceGateBlock(
-			BlockBehaviour.Properties.of().mapColor(MapColor.METAL).requiresCorrectToolForDrops().strength(4.0f, 5.0f).sound(SoundType.METAL)), Items.IRON_DOOR);
+	public static final RegistryObject<Block> IRON_FENCE = register("iron_fence", FenceBlock::new,
+			BlockBehaviour.Properties.of().mapColor(MapColor.METAL).requiresCorrectToolForDrops().strength(4.0f, 5.0f).sound(SoundType.METAL), Items.IRON_DOOR);
+	public static final RegistryObject<Block> IRON_FENCE_GATE = register("iron_fence_gate", IronFenceGateBlock::new,
+			BlockBehaviour.Properties.of().mapColor(MapColor.METAL).requiresCorrectToolForDrops().strength(4.0f, 5.0f).sound(SoundType.METAL), Items.IRON_DOOR);
 
-	public static final RegistryObject<Block> COPPER_FENCE = register("copper_fence", () -> new WeatheringCopperFenceBlock(WeatheringCopper.WeatherState.UNAFFECTED,
-			BlockBehaviour.Properties.of().mapColor(Blocks.COPPER_BLOCK.defaultMapColor()).strength(3.0f, 6.0f).requiresCorrectToolForDrops().sound(SoundType.COPPER)), Items.COPPER_DOOR);
-	public static final RegistryObject<Block> EXPOSED_COPPER_FENCE = register("exposed_copper_fence", () -> new WeatheringCopperFenceBlock(WeatheringCopper.WeatherState.EXPOSED, BlockBehaviour.Properties.ofFullCopy(COPPER_FENCE.get())), Items.EXPOSED_COPPER_DOOR);
-	public static final RegistryObject<Block> WEATHERED_COPPER_FENCE = register("weathered_copper_fence", () -> new WeatheringCopperFenceBlock(WeatheringCopper.WeatherState.WEATHERED, BlockBehaviour.Properties.ofFullCopy(COPPER_FENCE.get())), Items.WEATHERED_COPPER_DOOR);
-	public static final RegistryObject<Block> OXIDIZED_COPPER_FENCE = register("oxidized_copper_fence", () -> new WeatheringCopperFenceBlock(WeatheringCopper.WeatherState.OXIDIZED, BlockBehaviour.Properties.ofFullCopy(COPPER_FENCE.get())), Items.OXIDIZED_COPPER_DOOR);
-	public static final RegistryObject<Block> WAXED_COPPER_FENCE = register("waxed_copper_fence", () -> new WaxedCopperFenceBlock(BlockBehaviour.Properties.ofFullCopy(COPPER_FENCE.get())), Items.WAXED_COPPER_DOOR);
-	public static final RegistryObject<Block> WAXED_EXPOSED_COPPER_FENCE = register("waxed_exposed_copper_fence", () -> new WaxedCopperFenceBlock(BlockBehaviour.Properties.ofFullCopy(COPPER_FENCE.get())), Items.WAXED_EXPOSED_COPPER_DOOR);
-	public static final RegistryObject<Block> WAXED_WEATHERED_COPPER_FENCE = register("waxed_weathered_copper_fence", () -> new WaxedCopperFenceBlock(BlockBehaviour.Properties.ofFullCopy(COPPER_FENCE.get())), Items.WAXED_WEATHERED_COPPER_DOOR);
-	public static final RegistryObject<Block> WAXED_OXIDIZED_COPPER_FENCE = register("waxed_oxidized_copper_fence", () -> new WaxedCopperFenceBlock(BlockBehaviour.Properties.ofFullCopy(COPPER_FENCE.get())), Items.WAXED_OXIDIZED_COPPER_DOOR);
+	public static final RegistryObject<Block> COPPER_FENCE = register("copper_fence", (props) -> new WeatheringCopperFenceBlock(WeatheringCopper.WeatherState.UNAFFECTED, props), getCopperProps(), Items.COPPER_DOOR);
+	public static final RegistryObject<Block> EXPOSED_COPPER_FENCE = register("exposed_copper_fence", (props) -> new WeatheringCopperFenceBlock(WeatheringCopper.WeatherState.EXPOSED, props), getCopperProps(), Items.EXPOSED_COPPER_DOOR);
+	public static final RegistryObject<Block> WEATHERED_COPPER_FENCE = register("weathered_copper_fence", (props) -> new WeatheringCopperFenceBlock(WeatheringCopper.WeatherState.WEATHERED, props), getCopperProps(), Items.WEATHERED_COPPER_DOOR);
+	public static final RegistryObject<Block> OXIDIZED_COPPER_FENCE = register("oxidized_copper_fence", (props) -> new WeatheringCopperFenceBlock(WeatheringCopper.WeatherState.OXIDIZED, props), getCopperProps(), Items.OXIDIZED_COPPER_DOOR);
+	public static final RegistryObject<Block> WAXED_COPPER_FENCE = register("waxed_copper_fence", WaxedCopperFenceBlock::new, getCopperProps(), Items.WAXED_COPPER_DOOR);
+	public static final RegistryObject<Block> WAXED_EXPOSED_COPPER_FENCE = register("waxed_exposed_copper_fence", WaxedCopperFenceBlock::new, getCopperProps(), Items.WAXED_EXPOSED_COPPER_DOOR);
+	public static final RegistryObject<Block> WAXED_WEATHERED_COPPER_FENCE = register("waxed_weathered_copper_fence", WaxedCopperFenceBlock::new, getCopperProps(), Items.WAXED_WEATHERED_COPPER_DOOR);
+	public static final RegistryObject<Block> WAXED_OXIDIZED_COPPER_FENCE = register("waxed_oxidized_copper_fence", WaxedCopperFenceBlock::new, getCopperProps(), Items.WAXED_OXIDIZED_COPPER_DOOR);
 
-	public static final RegistryObject<Block> COPPER_FENCE_GATE = register("copper_fence_gate", () -> new WeatheringCopperFenceGateBlock(WeatheringCopper.WeatherState.UNAFFECTED, BlockBehaviour.Properties.ofFullCopy(COPPER_FENCE.get())), Items.COPPER_DOOR);
-	public static final RegistryObject<Block> EXPOSED_COPPER_FENCE_GATE = register("exposed_copper_fence_gate", () -> new WeatheringCopperFenceGateBlock(WeatheringCopper.WeatherState.EXPOSED, BlockBehaviour.Properties.ofFullCopy(COPPER_FENCE.get())), Items.EXPOSED_COPPER_DOOR);
-	public static final RegistryObject<Block> WEATHERED_COPPER_FENCE_GATE = register("weathered_copper_fence_gate", () -> new WeatheringCopperFenceGateBlock(WeatheringCopper.WeatherState.WEATHERED, BlockBehaviour.Properties.ofFullCopy(COPPER_FENCE.get())), Items.WEATHERED_COPPER_DOOR);
-	public static final RegistryObject<Block> OXIDIZED_COPPER_FENCE_GATE = register("oxidized_copper_fence_gate", () -> new WeatheringCopperFenceGateBlock(WeatheringCopper.WeatherState.OXIDIZED, BlockBehaviour.Properties.ofFullCopy(COPPER_FENCE.get())), Items.OXIDIZED_COPPER_DOOR);
-	public static final RegistryObject<Block> WAXED_COPPER_FENCE_GATE = register("waxed_copper_fence_gate", () -> new WaxedCopperFenceGateBlock(BlockBehaviour.Properties.ofFullCopy(COPPER_FENCE.get())), Items.WAXED_COPPER_DOOR);
-	public static final RegistryObject<Block> WAXED_EXPOSED_COPPER_FENCE_GATE = register("waxed_exposed_copper_fence_gate", () -> new WaxedCopperFenceGateBlock(BlockBehaviour.Properties.ofFullCopy(COPPER_FENCE.get())), Items.WAXED_EXPOSED_COPPER_DOOR);
-	public static final RegistryObject<Block> WAXED_WEATHERED_COPPER_FENCE_GATE = register("waxed_weathered_copper_fence_gate", () -> new WaxedCopperFenceGateBlock(BlockBehaviour.Properties.ofFullCopy(COPPER_FENCE.get())), Items.WAXED_WEATHERED_COPPER_DOOR);
-	public static final RegistryObject<Block> WAXED_OXIDIZED_COPPER_FENCE_GATE = register("waxed_oxidized_copper_fence_gate", () -> new WaxedCopperFenceGateBlock(BlockBehaviour.Properties.ofFullCopy(COPPER_FENCE.get())), Items.WAXED_OXIDIZED_COPPER_DOOR);
+	public static final RegistryObject<Block> COPPER_FENCE_GATE = register("copper_fence_gate", (props) -> new WeatheringCopperFenceGateBlock(WeatheringCopper.WeatherState.UNAFFECTED, props), getCopperProps(), Items.COPPER_DOOR);
+	public static final RegistryObject<Block> EXPOSED_COPPER_FENCE_GATE = register("exposed_copper_fence_gate", (props) -> new WeatheringCopperFenceGateBlock(WeatheringCopper.WeatherState.EXPOSED, props), getCopperProps(), Items.EXPOSED_COPPER_DOOR);
+	public static final RegistryObject<Block> WEATHERED_COPPER_FENCE_GATE = register("weathered_copper_fence_gate", (props) -> new WeatheringCopperFenceGateBlock(WeatheringCopper.WeatherState.WEATHERED, props), getCopperProps(), Items.WEATHERED_COPPER_DOOR);
+	public static final RegistryObject<Block> OXIDIZED_COPPER_FENCE_GATE = register("oxidized_copper_fence_gate", (props) -> new WeatheringCopperFenceGateBlock(WeatheringCopper.WeatherState.OXIDIZED, props), getCopperProps(), Items.OXIDIZED_COPPER_DOOR);
+	public static final RegistryObject<Block> WAXED_COPPER_FENCE_GATE = register("waxed_copper_fence_gate", WaxedCopperFenceGateBlock::new, getCopperProps(), Items.WAXED_COPPER_DOOR);
+	public static final RegistryObject<Block> WAXED_EXPOSED_COPPER_FENCE_GATE = register("waxed_exposed_copper_fence_gate", WaxedCopperFenceGateBlock::new, getCopperProps(), Items.WAXED_EXPOSED_COPPER_DOOR);
+	public static final RegistryObject<Block> WAXED_WEATHERED_COPPER_FENCE_GATE = register("waxed_weathered_copper_fence_gate", WaxedCopperFenceGateBlock::new, getCopperProps(), Items.WAXED_WEATHERED_COPPER_DOOR);
+	public static final RegistryObject<Block> WAXED_OXIDIZED_COPPER_FENCE_GATE = register("waxed_oxidized_copper_fence_gate", WaxedCopperFenceGateBlock::new, getCopperProps(), Items.WAXED_OXIDIZED_COPPER_DOOR);
 
 
 	public static final BiMap<ResourceLocation, ResourceLocation> WEATHERING = ImmutableBiMap.of(
@@ -91,12 +94,19 @@ public class MetalFencesMod extends MetalFencesBlockAccessor
 		modEventBus.addListener(this::addToCreativeTab);
 	}
 
-	private static RegistryObject<Block> register(String id, Supplier<Block> blockSupplier, Item nextInTab)
+	private static RegistryObject<Block> register(String id, Function<BlockBehaviour.Properties, Block> blockSupplier, BlockBehaviour.Properties properties, Item nextInTab)
 	{
-		RegistryObject<Block> registryObject = BLOCKS.register(id, blockSupplier);
-		RegistryObject<Item> item = ITEMS.register(id, () -> new BlockItem(registryObject.get(), new Item.Properties()));
+		ResourceLocation resLoc = ResourceLocation.fromNamespaceAndPath(MOD_ID, id);
+		RegistryObject<Block> registryObject = BLOCKS.register(id, () -> blockSupplier.apply(properties.setId(ResourceKey.create(Registries.BLOCK, resLoc))));
+		RegistryObject<Item> item = ITEMS.register(id, () -> new BlockItem(registryObject.get(),
+				new Item.Properties().useBlockDescriptionPrefix().setId(ResourceKey.create(Registries.ITEM, resLoc))));
 		creativeTabPairs.add(Pair.of(item, nextInTab));
 		return registryObject;
+	}
+
+	private static BlockBehaviour.Properties getCopperProps()
+	{
+		return BlockBehaviour.Properties.of().mapColor(Blocks.COPPER_BLOCK.defaultMapColor()).strength(3.0f, 6.0f).requiresCorrectToolForDrops().sound(SoundType.COPPER);
 	}
 
 	private void addToCreativeTab(BuildCreativeModeTabContentsEvent event)

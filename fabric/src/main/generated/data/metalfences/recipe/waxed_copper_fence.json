@@ -2,12 +2,8 @@
   "type": "minecraft:crafting_shapeless",
   "category": "misc",
   "ingredients": [
-    {
-      "item": "metalfences:copper_fence"
-    },
-    {
-      "item": "minecraft:honeycomb"
-    }
+    "metalfences:copper_fence",
+    "minecraft:honeycomb"
   ],
   "result": {
     "count": 1,
