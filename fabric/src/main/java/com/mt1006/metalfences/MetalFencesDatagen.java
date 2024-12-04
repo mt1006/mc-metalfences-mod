@@ -1,21 +1,21 @@
 package com.mt1006.metalfences;
 
 import com.google.common.collect.Iterables;
+import net.fabricmc.fabric.api.client.datagen.v1.provider.FabricModelProvider;
 import net.fabricmc.fabric.api.datagen.v1.DataGeneratorEntrypoint;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricBlockLootTableProvider;
-import net.fabricmc.fabric.api.datagen.v1.provider.FabricModelProvider;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricRecipeProvider;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider;
+import net.minecraft.client.data.models.BlockModelGenerators;
+import net.minecraft.client.data.models.ItemModelGenerators;
+import net.minecraft.client.data.models.model.ModelTemplates;
+import net.minecraft.client.data.models.model.TextureMapping;
+import net.minecraft.client.data.models.model.TextureSlot;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.data.models.BlockModelGenerators;
-import net.minecraft.data.models.ItemModelGenerators;
-import net.minecraft.data.models.model.ModelTemplates;
-import net.minecraft.data.models.model.TextureMapping;
-import net.minecraft.data.models.model.TextureSlot;
 import net.minecraft.data.recipes.*;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
@@ -87,7 +87,7 @@ public class MetalFencesDatagen implements DataGeneratorEntrypoint
 			super(output, registriesFuture);
 		}
 
-		@Override protected RecipeProvider createRecipeProvider(HolderLookup.Provider provider, RecipeOutput recipeOutput)
+		@Override protected @NotNull RecipeProvider createRecipeProvider(HolderLookup.Provider provider, RecipeOutput recipeOutput)
 		{
 			return new RecipeBuilder(provider, recipeOutput);
 		}
@@ -284,7 +284,7 @@ public class MetalFencesDatagen implements DataGeneratorEntrypoint
 		public void addIronFenceGate(Block block)
 		{
 			familyProvider.fenceGate(block);
-			modelGenerator.delegateItemModel(block, BuiltInRegistries.BLOCK.getKey(block).withPrefix(BLOCK_PREFIX));
+			modelGenerator.registerSimpleItemModel(block, BuiltInRegistries.BLOCK.getKey(block).withPrefix(BLOCK_PREFIX));
 		}
 
 		public void addCopperFences(Block block, Block waxedBlock)
@@ -295,8 +295,8 @@ public class MetalFencesDatagen implements DataGeneratorEntrypoint
 			modelGenerator.blockStateOutput.accept(BlockModelGenerators.createFence(waxedBlock, fencePost, fenceSide));
 
 			ResourceLocation fenceInventory = ModelTemplates.FENCE_INVENTORY.create(block, textureMapping, modelGenerator.modelOutput);
-			modelGenerator.delegateItemModel(block, fenceInventory);
-			modelGenerator.delegateItemModel(waxedBlock, fenceInventory);
+			modelGenerator.registerSimpleItemModel(block, fenceInventory);
+			modelGenerator.registerSimpleItemModel(waxedBlock, fenceInventory);
 		}
 
 		public void addCopperFenceGates(Block block, Block waxedBlock)
@@ -311,8 +311,8 @@ public class MetalFencesDatagen implements DataGeneratorEntrypoint
 			modelGenerator.blockStateOutput.accept(
 					BlockModelGenerators.createFenceGate(waxedBlock, gateOpen, gateClosed, gateWallOpen, gateWallClosed, true));
 
-			modelGenerator.delegateItemModel(block, gateClosed);
-			modelGenerator.delegateItemModel(waxedBlock, gateClosed);
+			modelGenerator.registerSimpleItemModel(block, gateClosed);
+			modelGenerator.registerSimpleItemModel(waxedBlock, gateClosed);
 		}
 	}
 }
