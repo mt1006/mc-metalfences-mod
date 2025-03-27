@@ -1,9 +1,7 @@
-package com.mt1006.metalfences.blocks;
+package net.mt1006.metalfences.blocks;
 
-import com.mt1006.metalfences.MetalFencesBlockAccessor;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.sounds.SoundEvents;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.ItemInteractionResult;
@@ -11,26 +9,22 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.FenceGateBlock;
-import net.minecraft.world.level.block.SoundType;
+import net.minecraft.world.level.block.FenceBlock;
 import net.minecraft.world.level.block.WeatheringCopper;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.block.state.properties.BlockSetType;
-import net.minecraft.world.level.block.state.properties.WoodType;
 import net.minecraft.world.phys.BlockHitResult;
+import net.mt1006.metalfences.MetalFencesBlockAccessor;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Optional;
 
-public class WeatheringCopperFenceGateBlock extends FenceGateBlock implements WeatheringCopper
+public class WeatheringCopperFenceBlock extends FenceBlock implements WeatheringCopper
 {
-	public static final WoodType MATERIAL = new WoodType("metalfences:copper_fence_gate_wood", BlockSetType.COPPER,
-			SoundType.COPPER, SoundType.HANGING_SIGN, SoundEvents.COPPER_DOOR_OPEN, SoundEvents.COPPER_DOOR_CLOSE);
-	private final WeatherState weatherState;
+	private final WeatheringCopper.WeatherState weatherState;
 
-	public WeatheringCopperFenceGateBlock(WeatherState weatherState, Properties properties)
+	public WeatheringCopperFenceBlock(WeatherState weatherState, Properties properties)
 	{
-		super(MATERIAL, properties);
+		super(properties);
 		this.weatherState = weatherState;
 	}
 

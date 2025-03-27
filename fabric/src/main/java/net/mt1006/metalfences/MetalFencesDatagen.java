@@ -1,4 +1,4 @@
-package com.mt1006.metalfences;
+package net.mt1006.metalfences;
 
 import com.google.common.collect.Iterables;
 import net.fabricmc.fabric.api.datagen.v1.DataGeneratorEntrypoint;
