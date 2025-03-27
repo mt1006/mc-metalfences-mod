@@ -19,8 +19,8 @@
 	"environment": "*",
 	"entrypoints":
 	{
-		"main": ["com.mt1006.metalfences.MetalFencesMod"],
-		"fabric-datagen": [ "com.mt1006.metalfences.MetalFencesDatagen" ]
+		"main": ["net.mt1006.metalfences.MetalFencesMod"],
+		"fabric-datagen": ["net.mt1006.metalfences.MetalFencesDatagen"]
 	},
 
 	"depends":
