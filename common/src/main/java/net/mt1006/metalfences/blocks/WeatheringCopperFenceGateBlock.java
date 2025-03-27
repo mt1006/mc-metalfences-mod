@@ -1,6 +1,5 @@
-package com.mt1006.metalfences.blocks;
+package net.mt1006.metalfences.blocks;
 
-import com.mt1006.metalfences.MetalFencesBlockAccessor;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
@@ -17,6 +16,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockSetType;
 import net.minecraft.world.level.block.state.properties.WoodType;
 import net.minecraft.world.phys.BlockHitResult;
+import net.mt1006.metalfences.MetalFencesBlockAccessor;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Optional;

@@ -16,4 +16,4 @@ dependencies
 }
 
 fabricApi { configureDataGeneration() }
-jar { exclude "com/mt1006/metalfences/MetalFencesDatagen*" }
+jar { exclude "net/mt1006/metalfences/MetalFencesDatagen*" }

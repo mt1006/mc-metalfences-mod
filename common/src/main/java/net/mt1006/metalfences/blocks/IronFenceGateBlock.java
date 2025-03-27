@@ -1,4 +1,4 @@
-package com.mt1006.metalfences.blocks;
+package net.mt1006.metalfences.blocks;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.sounds.SoundEvents;

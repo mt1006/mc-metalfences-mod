@@ -1,9 +1,8 @@
-package com.mt1006.metalfences;
+package net.mt1006.metalfences;
 
 import com.google.common.collect.BiMap;
 import com.google.common.collect.ImmutableBiMap;
 import com.mojang.datafixers.util.Pair;
-import com.mt1006.metalfences.blocks.*;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.*;
 import net.minecraft.world.level.block.*;
@@ -17,6 +16,7 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
+import net.mt1006.metalfences.blocks.*;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;

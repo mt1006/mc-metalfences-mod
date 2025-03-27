@@ -1,4 +1,4 @@
-package com.mt1006.metalfences;
+package net.mt1006.metalfences;
 
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.core.BlockPos;
