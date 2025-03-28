@@ -10,6 +10,7 @@ import net.fabricmc.fabric.api.datagen.v1.provider.FabricRecipeProvider;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider;
 import net.minecraft.client.data.models.BlockModelGenerators;
 import net.minecraft.client.data.models.ItemModelGenerators;
+import net.minecraft.client.data.models.MultiVariant;
 import net.minecraft.client.data.models.model.ModelTemplates;
 import net.minecraft.client.data.models.model.TextureMapping;
 import net.minecraft.client.data.models.model.TextureSlot;
@@ -291,8 +292,8 @@ public class MetalFencesDatagen implements DataGeneratorEntrypoint
 
 		public void addCopperFences(Block block, Block waxedBlock)
 		{
-			ResourceLocation fencePost = ModelTemplates.FENCE_POST.create(block, textureMapping, modelGenerator.modelOutput);
-			ResourceLocation fenceSide = ModelTemplates.FENCE_SIDE.create(block, textureMapping, modelGenerator.modelOutput);
+			MultiVariant fencePost = BlockModelGenerators.plainVariant(ModelTemplates.FENCE_POST.create(block, textureMapping, modelGenerator.modelOutput));
+			MultiVariant fenceSide = BlockModelGenerators.plainVariant(ModelTemplates.FENCE_SIDE.create(block, textureMapping, modelGenerator.modelOutput));
 			modelGenerator.blockStateOutput.accept(BlockModelGenerators.createFence(block, fencePost, fenceSide));
 			modelGenerator.blockStateOutput.accept(BlockModelGenerators.createFence(waxedBlock, fencePost, fenceSide));
 
@@ -303,18 +304,19 @@ public class MetalFencesDatagen implements DataGeneratorEntrypoint
 
 		public void addCopperFenceGates(Block block, Block waxedBlock)
 		{
-			ResourceLocation gateOpen = ModelTemplates.FENCE_GATE_OPEN.create(block, textureMapping, modelGenerator.modelOutput);
-			ResourceLocation gateClosed = ModelTemplates.FENCE_GATE_CLOSED.create(block, textureMapping, modelGenerator.modelOutput);
-			ResourceLocation gateWallOpen = ModelTemplates.FENCE_GATE_WALL_OPEN.create(block, textureMapping, modelGenerator.modelOutput);
-			ResourceLocation gateWallClosed = ModelTemplates.FENCE_GATE_WALL_CLOSED.create(block, textureMapping, modelGenerator.modelOutput);
+			ResourceLocation gateClosedId = ModelTemplates.FENCE_GATE_CLOSED.create(block, textureMapping, modelGenerator.modelOutput);
+			MultiVariant gateOpen = BlockModelGenerators.plainVariant(ModelTemplates.FENCE_GATE_OPEN.create(block, textureMapping, modelGenerator.modelOutput));
+			MultiVariant gateClosed = BlockModelGenerators.plainVariant(gateClosedId);
+			MultiVariant gateWallOpen = BlockModelGenerators.plainVariant(ModelTemplates.FENCE_GATE_WALL_OPEN.create(block, textureMapping, modelGenerator.modelOutput));
+			MultiVariant gateWallClosed = BlockModelGenerators.plainVariant(ModelTemplates.FENCE_GATE_WALL_CLOSED.create(block, textureMapping, modelGenerator.modelOutput));
 
 			modelGenerator.blockStateOutput.accept(
 					BlockModelGenerators.createFenceGate(block, gateOpen, gateClosed, gateWallOpen, gateWallClosed, true));
 			modelGenerator.blockStateOutput.accept(
 					BlockModelGenerators.createFenceGate(waxedBlock, gateOpen, gateClosed, gateWallOpen, gateWallClosed, true));
 
-			modelGenerator.registerSimpleItemModel(block, gateClosed);
-			modelGenerator.registerSimpleItemModel(waxedBlock, gateClosed);
+			modelGenerator.registerSimpleItemModel(block, gateClosedId);
+			modelGenerator.registerSimpleItemModel(waxedBlock, gateClosedId);
 		}
 	}
 }
