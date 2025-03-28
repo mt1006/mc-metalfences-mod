@@ -3,7 +3,7 @@
 
 They're crafted in a similar way to vanilla fences, but instead of planks, ingots are used, and in case of iron variants, instead of sticks, iron nuggets are used.
 
-See [galery](https://modrinth.com/mod/metal-fences/gallery) for craftings.
+See [gallery](https://modrinth.com/mod/metal-fences/gallery) for craftings.
 
 CurseForge page: https://www.curseforge.com/minecraft/mc-mods/metal-fences
 
