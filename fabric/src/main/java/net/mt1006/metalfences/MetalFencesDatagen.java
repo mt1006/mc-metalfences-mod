@@ -20,6 +20,7 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.data.recipes.RecipeCategory;
 import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.data.recipes.RecipeProvider;
+import net.minecraft.data.tags.TagAppender;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.ItemTags;
@@ -176,29 +177,29 @@ public class MetalFencesDatagen implements DataGeneratorEntrypoint
 
 		@Override protected void addTags(HolderLookup.Provider provider)
 		{
-			FabricTagBuilder copperFenceBlocks = getOrCreateTagBuilder(COPPER_FENCE_BLOCKS);
+			TagAppender<Block, Block> copperFenceBlocks = valueLookupBuilder(COPPER_FENCE_BLOCKS);
 			COPPER_FENCES.forEach(copperFenceBlocks::add);
 
-			FabricTagBuilder copperFenceGateBlocks = getOrCreateTagBuilder(COPPER_FENCE_GATE_BLOCKS);
+			TagAppender<Block, Block> copperFenceGateBlocks = valueLookupBuilder(COPPER_FENCE_GATE_BLOCKS);
 			COPPER_FENCE_GATES.forEach(copperFenceGateBlocks::add);
 
-			FabricTagBuilder metalFenceBlocks = getOrCreateTagBuilder(METAL_FENCE_BLOCKS);
+			TagAppender<Block, Block> metalFenceBlocks = valueLookupBuilder(METAL_FENCE_BLOCKS);
 			metalFenceBlocks.add(MetalFencesMod.IRON_FENCE);
 			metalFenceBlocks.addOptionalTag(COPPER_FENCE_BLOCKS);
 
-			FabricTagBuilder metalFenceGateBlocks = getOrCreateTagBuilder(METAL_FENCE_GATE_BLOCKS);
+			TagAppender<Block, Block> metalFenceGateBlocks = valueLookupBuilder(METAL_FENCE_GATE_BLOCKS);
 			metalFenceGateBlocks.add(MetalFencesMod.IRON_FENCE_GATE);
 			metalFenceGateBlocks.addOptionalTag(COPPER_FENCE_GATE_BLOCKS);
 
-			getOrCreateTagBuilder(BlockTags.FENCES).addOptionalTag(METAL_FENCE_BLOCKS);
-			getOrCreateTagBuilder(BlockTags.FENCE_GATES).addOptionalTag(METAL_FENCE_GATE_BLOCKS);
-			getOrCreateTagBuilder(IRON_DOOR_KEY_OPENABLE).add(MetalFencesMod.IRON_FENCE_GATE);
+			valueLookupBuilder(BlockTags.FENCES).addOptionalTag(METAL_FENCE_BLOCKS);
+			valueLookupBuilder(BlockTags.FENCE_GATES).addOptionalTag(METAL_FENCE_GATE_BLOCKS);
+			valueLookupBuilder(IRON_DOOR_KEY_OPENABLE).add(MetalFencesMod.IRON_FENCE_GATE);
 
-			FabricTagBuilder mineableWithPickaxe = getOrCreateTagBuilder(BlockTags.MINEABLE_WITH_PICKAXE);
+			TagAppender<Block, Block> mineableWithPickaxe = valueLookupBuilder(BlockTags.MINEABLE_WITH_PICKAXE);
 			mineableWithPickaxe.addOptionalTag(METAL_FENCE_BLOCKS);
 			mineableWithPickaxe.addOptionalTag(METAL_FENCE_GATE_BLOCKS);
 
-			FabricTagBuilder needsStoneTool = getOrCreateTagBuilder(BlockTags.NEEDS_STONE_TOOL);
+			TagAppender<Block, Block> needsStoneTool = valueLookupBuilder(BlockTags.NEEDS_STONE_TOOL);
 			needsStoneTool.addOptionalTag(COPPER_FENCE_BLOCKS);
 			needsStoneTool.addOptionalTag(COPPER_FENCE_GATE_BLOCKS);
 		}
@@ -213,22 +214,22 @@ public class MetalFencesDatagen implements DataGeneratorEntrypoint
 
 		@Override protected void addTags(HolderLookup.Provider provider)
 		{
-			FabricTagBuilder copperFenceItems = getOrCreateTagBuilder(COPPER_FENCE_ITEMS);
+			TagAppender<Item, Item> copperFenceItems = valueLookupBuilder(COPPER_FENCE_ITEMS);
 			COPPER_FENCES.forEach((block) -> copperFenceItems.add(block.asItem()));
 
-			FabricTagBuilder copperFenceGateItems = getOrCreateTagBuilder(COPPER_FENCE_GATE_ITEMS);
+			TagAppender<Item, Item> copperFenceGateItems = valueLookupBuilder(COPPER_FENCE_GATE_ITEMS);
 			COPPER_FENCE_GATES.forEach((block) -> copperFenceGateItems.add(block.asItem()));
 
-			FabricTagBuilder metalFenceItems = getOrCreateTagBuilder(METAL_FENCE_ITEMS);
+			TagAppender<Item, Item> metalFenceItems = valueLookupBuilder(METAL_FENCE_ITEMS);
 			metalFenceItems.add(MetalFencesMod.IRON_FENCE.asItem());
 			metalFenceItems.addOptionalTag(COPPER_FENCE_ITEMS);
 
-			FabricTagBuilder metalFenceGateItems = getOrCreateTagBuilder(METAL_FENCE_GATE_ITEMS);
+			TagAppender<Item, Item> metalFenceGateItems = valueLookupBuilder(METAL_FENCE_GATE_ITEMS);
 			metalFenceGateItems.add(MetalFencesMod.IRON_FENCE_GATE.asItem());
 			metalFenceGateItems.addOptionalTag(COPPER_FENCE_GATE_ITEMS);
 
-			getOrCreateTagBuilder(ItemTags.FENCES).addOptionalTag(METAL_FENCE_ITEMS);
-			getOrCreateTagBuilder(ItemTags.FENCE_GATES).addOptionalTag(METAL_FENCE_GATE_ITEMS);
+			valueLookupBuilder(ItemTags.FENCES).addOptionalTag(METAL_FENCE_ITEMS);
+			valueLookupBuilder(ItemTags.FENCE_GATES).addOptionalTag(METAL_FENCE_GATE_ITEMS);
 		}
 	}
 
