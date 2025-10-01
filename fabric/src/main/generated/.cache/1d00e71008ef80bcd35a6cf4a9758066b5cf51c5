@@ -1,4 +1,4 @@
-// 1.21.6	-999999999-01-01T00:00:00	Metal Fences/Metal Fences Recipe Provider
+// 1.21.9	-999999999-01-01T00:00:00	Metal Fences/Metal Fences Recipe Provider
 ce569cc5229a48525a08ace7397bd4e6de01fe5f data/metalfences/advancement/recipes/decorations/copper_fence.json
 b9f4e4df8255a1ea95709ab813fb094e88415997 data/metalfences/advancement/recipes/decorations/iron_fence.json
 48ec1c2a15017ff5de90c88262d94f413425826b data/metalfences/advancement/recipes/decorations/waxed_copper_fence.json
@@ -11,8 +11,8 @@ c9e066a27b443783459d7d485ca4408b965e857d data/metalfences/advancement/recipes/re
 78d7af1e175ec26ace3b74b7bec67839030041e4 data/metalfences/advancement/recipes/redstone/waxed_exposed_copper_fence_gate.json
 fd0ba39f28d08b4050925c8dc6344fbf6a978751 data/metalfences/advancement/recipes/redstone/waxed_oxidized_copper_fence_gate.json
 96c3b645ee7db4d84fc49a32d0e02359921bcb6a data/metalfences/advancement/recipes/redstone/waxed_weathered_copper_fence_gate.json
-112ce454aba2b74e89d7e68b39242e647794521a data/metalfences/recipe/copper_fence.json
-6aa6ab1650bbe8718a75d4fe2a689752a2bd36e8 data/metalfences/recipe/copper_fence_gate.json
+58bafb455a795a10d47b303b58a929a6318f050e data/metalfences/recipe/copper_fence.json
+372df3bb614552dfa79a6f02e47a9390cd884a01 data/metalfences/recipe/copper_fence_gate.json
 a4ac07566b7fabd8e4b06c7f777d8af94d9d76eb data/metalfences/recipe/iron_fence.json
 627999cb8a25044ad4c2496152baf20bd54e332f data/metalfences/recipe/iron_fence_gate.json
 bb41a2b070bc1a23e18072bd4cd79128146420ba data/metalfences/recipe/waxed_copper_fence.json

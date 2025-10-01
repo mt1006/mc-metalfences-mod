@@ -124,14 +124,14 @@ public class MetalFencesDatagen implements DataGeneratorEntrypoint
 					.save(output);
 
 			shaped(RecipeCategory.DECORATIONS, MetalFencesMod.COPPER_FENCE)
-					.define('#', Items.COPPER_INGOT).define('/', Items.STICK)
-					.pattern("#/#").pattern("#/#")
+					.define('#', Items.COPPER_INGOT).define('-', Items.COPPER_NUGGET)
+					.pattern("#-#").pattern("#-#")
 					.unlockedBy("has_copper_ingot", has(Items.COPPER_INGOT))
 					.save(output);
 
 			shaped(RecipeCategory.REDSTONE, MetalFencesMod.COPPER_FENCE_GATE)
-					.define('#', Items.COPPER_INGOT).define('/', Items.STICK)
-					.pattern("/#/").pattern("/#/")
+					.define('#', Items.COPPER_INGOT).define('-', Items.COPPER_NUGGET)
+					.pattern("-#-").pattern("-#-")
 					.unlockedBy("has_copper_ingot", has(Items.COPPER_INGOT))
 					.save(output);
 

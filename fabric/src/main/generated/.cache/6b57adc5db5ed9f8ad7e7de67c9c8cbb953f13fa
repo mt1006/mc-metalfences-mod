@@ -1,4 +1,4 @@
-// 1.21.6	-999999999-01-01T00:00:00	Metal Fences/Block Loot Tables
+// 1.21.9	-999999999-01-01T00:00:00	Metal Fences/Block Loot Tables
 7137ec786e6ebd71f85d69a2cb8cfab6b1a48bff data/metalfences/loot_table/blocks/copper_fence.json
 a571b02b258678dfebd9464778f0d225cd8b2cdf data/metalfences/loot_table/blocks/copper_fence_gate.json
 c6150f4238bd2ba27c9e6dfa4c2358ac707e6130 data/metalfences/loot_table/blocks/exposed_copper_fence.json

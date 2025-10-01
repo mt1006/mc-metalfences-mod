@@ -3,11 +3,11 @@
   "category": "misc",
   "key": {
     "#": "minecraft:copper_ingot",
-    "/": "minecraft:stick"
+    "-": "minecraft:copper_nugget"
   },
   "pattern": [
-    "#/#",
-    "#/#"
+    "#-#",
+    "#-#"
   ],
   "result": {
     "count": 1,
