@@ -9,8 +9,8 @@ import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.item.Item;
@@ -30,7 +30,7 @@ public class MetalFencesMod extends MetalFencesBlockAccessor implements ModIniti
 {
 	public static final String MOD_ID = "metalfences";
 
-	private static final ArrayList<Triple<ResourceLocation, Block, Item>> toRegister = new ArrayList<>();
+	private static final ArrayList<Triple<Identifier, Block, Item>> toRegister = new ArrayList<>();
 	private static final List<Pair<Item, Item>> creativeTabPairs = new ArrayList<>();
 
 	public static final Block IRON_FENCE = register("iron_fence", FenceBlock::new,
@@ -83,7 +83,7 @@ public class MetalFencesMod extends MetalFencesBlockAccessor implements ModIniti
 	{
 		MetalFencesBlockAccessor.ACCESSOR = this;
 
-		for (Triple<ResourceLocation, Block, Item> triple : toRegister)
+		for (Triple<Identifier, Block, Item> triple : toRegister)
 		{
 			Registry.register(BuiltInRegistries.BLOCK, triple.getLeft(), triple.getMiddle());
 			Registry.register(BuiltInRegistries.ITEM, triple.getLeft(), triple.getRight());
@@ -93,13 +93,13 @@ public class MetalFencesMod extends MetalFencesBlockAccessor implements ModIniti
 		ItemGroupEvents.modifyEntriesEvent(CreativeModeTabs.BUILDING_BLOCKS).register(this::addToCreativeTab);
 	}
 
-	private static Block register(String id, Function<BlockBehaviour.Properties, Block> blockSupplier, BlockBehaviour.Properties properties, Item nextInTab)
+	private static Block register(String idStr, Function<BlockBehaviour.Properties, Block> blockSupplier, BlockBehaviour.Properties properties, Item nextInTab)
 	{
-		ResourceLocation resLoc = ResourceLocation.fromNamespaceAndPath(MOD_ID, id);
-		Block block = blockSupplier.apply(properties.setId(ResourceKey.create(Registries.BLOCK, resLoc)));
-		Item item = new BlockItem(block, new Item.Properties().useBlockDescriptionPrefix().setId(ResourceKey.create(Registries.ITEM, resLoc)));
+		Identifier id = Identifier.fromNamespaceAndPath(MOD_ID, idStr);
+		Block block = blockSupplier.apply(properties.setId(ResourceKey.create(Registries.BLOCK, id)));
+		Item item = new BlockItem(block, new Item.Properties().useBlockDescriptionPrefix().setId(ResourceKey.create(Registries.ITEM, id)));
 
-		toRegister.add(Triple.of(resLoc, block, item));
+		toRegister.add(Triple.of(id, block, item));
 		creativeTabPairs.add(Pair.of(item, nextInTab));
 		return block;
 	}

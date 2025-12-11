@@ -5,7 +5,7 @@ import com.google.common.collect.ImmutableBiMap;
 import com.mojang.datafixers.util.Pair;
 import net.minecraft.core.Holder;
 import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.*;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockBehaviour;
@@ -58,16 +58,16 @@ public class MetalFencesMod extends MetalFencesBlockAccessor
 	public static final DeferredHolder<Block, Block> WAXED_OXIDIZED_COPPER_FENCE_GATE = register("waxed_oxidized_copper_fence_gate", WaxedCopperFenceGateBlock::new, getCopperProps(), Items.WAXED_OXIDIZED_COPPER_DOOR);
 
 
-	public static final BiMap<ResourceLocation, ResourceLocation> WEATHERING = ImmutableBiMap.of(
+	public static final BiMap<Identifier, Identifier> WEATHERING = ImmutableBiMap.of(
 			COPPER_FENCE.getId(), EXPOSED_COPPER_FENCE.getId(),
 			EXPOSED_COPPER_FENCE.getId(), WEATHERED_COPPER_FENCE.getId(),
 			WEATHERED_COPPER_FENCE.getId(), OXIDIZED_COPPER_FENCE.getId(),
 			COPPER_FENCE_GATE.getId(), EXPOSED_COPPER_FENCE_GATE.getId(),
 			EXPOSED_COPPER_FENCE_GATE.getId(), WEATHERED_COPPER_FENCE_GATE.getId(),
 			WEATHERED_COPPER_FENCE_GATE.getId(), OXIDIZED_COPPER_FENCE_GATE.getId());
-	public static final BiMap<ResourceLocation, ResourceLocation> INVERSE_WEATHERING = WEATHERING.inverse();
+	public static final BiMap<Identifier, Identifier> INVERSE_WEATHERING = WEATHERING.inverse();
 
-	public static final BiMap<ResourceLocation, ResourceLocation> WAXABLES = ImmutableBiMap.of(
+	public static final BiMap<Identifier, Identifier> WAXABLES = ImmutableBiMap.of(
 			COPPER_FENCE.getId(), WAXED_COPPER_FENCE.getId(),
 			EXPOSED_COPPER_FENCE.getId(), WAXED_EXPOSED_COPPER_FENCE.getId(),
 			WEATHERED_COPPER_FENCE.getId(), WAXED_WEATHERED_COPPER_FENCE.getId(),
@@ -76,7 +76,7 @@ public class MetalFencesMod extends MetalFencesBlockAccessor
 			EXPOSED_COPPER_FENCE_GATE.getId(), WAXED_EXPOSED_COPPER_FENCE_GATE.getId(),
 			WEATHERED_COPPER_FENCE_GATE.getId(), WAXED_WEATHERED_COPPER_FENCE_GATE.getId(),
 			OXIDIZED_COPPER_FENCE_GATE.getId(), WAXED_OXIDIZED_COPPER_FENCE_GATE.getId());
-	public static final BiMap<ResourceLocation, ResourceLocation> UNWAXABLES = WAXABLES.inverse();
+	public static final BiMap<Identifier, Identifier> UNWAXABLES = WAXABLES.inverse();
 
 
 	public MetalFencesMod(IEventBus modEventBus)
@@ -90,7 +90,7 @@ public class MetalFencesMod extends MetalFencesBlockAccessor
 
 	private static DeferredHolder<Block, Block> register(String id, Function<BlockBehaviour.Properties, Block> blockSupplier, BlockBehaviour.Properties properties, Item nextInTab)
 	{
-		DeferredHolder<Block, Block> registryObject = BLOCKS.registerBlock(id, blockSupplier, properties);
+		DeferredHolder<Block, Block> registryObject = BLOCKS.registerBlock(id, blockSupplier, () -> properties);
 		DeferredHolder<Item, Item> item = ITEMS.registerItem(id, (props) -> new BlockItem(registryObject.get(), props.useBlockDescriptionPrefix()));
 		creativeTabPairs.add(Pair.of(item, nextInTab));
 		return registryObject;
@@ -108,10 +108,10 @@ public class MetalFencesMod extends MetalFencesBlockAccessor
 		}
 	}
 
-	private @Nullable Block getFromMap(Map<ResourceLocation, ResourceLocation> map, Block block)
+	private @Nullable Block getFromMap(Map<Identifier, Identifier> map, Block block)
 	{
 		if (!BuiltInRegistries.BLOCK.containsValue(block)) { return null; }
-		ResourceLocation newBlockId = map.get(BuiltInRegistries.BLOCK.getKey(block));
+		Identifier newBlockId = map.get(BuiltInRegistries.BLOCK.getKey(block));
 
 		if (newBlockId == null || !BuiltInRegistries.BLOCK.containsKey(newBlockId)) { return null; }
 		Holder.Reference<Block> ref = BuiltInRegistries.BLOCK.get(newBlockId).orElse(null);

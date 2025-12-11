@@ -21,7 +21,7 @@ import net.minecraft.data.recipes.RecipeCategory;
 import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.data.recipes.RecipeProvider;
 import net.minecraft.data.tags.TagAppender;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
@@ -57,13 +57,13 @@ public class MetalFencesDatagen implements DataGeneratorEntrypoint
 
 
 	private static final TagKey<Block> METAL_FENCE_BLOCKS = TagKey.create(Registries.BLOCK,
-			ResourceLocation.fromNamespaceAndPath(MetalFencesMod.MOD_ID, "metal_fences"));
+			Identifier.fromNamespaceAndPath(MetalFencesMod.MOD_ID, "metal_fences"));
 	private static final TagKey<Block> METAL_FENCE_GATE_BLOCKS = TagKey.create(Registries.BLOCK,
-			ResourceLocation.fromNamespaceAndPath(MetalFencesMod.MOD_ID, "metal_fence_gates"));
+			Identifier.fromNamespaceAndPath(MetalFencesMod.MOD_ID, "metal_fence_gates"));
 	private static final TagKey<Block> COPPER_FENCE_BLOCKS = TagKey.create(Registries.BLOCK,
-			ResourceLocation.fromNamespaceAndPath(MetalFencesMod.MOD_ID, "copper_fences"));
+			Identifier.fromNamespaceAndPath(MetalFencesMod.MOD_ID, "copper_fences"));
 	private static final TagKey<Block> COPPER_FENCE_GATE_BLOCKS = TagKey.create(Registries.BLOCK,
-			ResourceLocation.fromNamespaceAndPath(MetalFencesMod.MOD_ID, "copper_fence_gates"));
+			Identifier.fromNamespaceAndPath(MetalFencesMod.MOD_ID, "copper_fence_gates"));
 
 	private static final TagKey<Item> METAL_FENCE_ITEMS = TagKey.create(Registries.ITEM, METAL_FENCE_BLOCKS.location());
 	private static final TagKey<Item> METAL_FENCE_GATE_ITEMS = TagKey.create(Registries.ITEM, METAL_FENCE_GATE_BLOCKS.location());
@@ -71,7 +71,7 @@ public class MetalFencesDatagen implements DataGeneratorEntrypoint
 	private static final TagKey<Item> COPPER_FENCE_GATE_ITEMS = TagKey.create(Registries.ITEM, COPPER_FENCE_GATE_BLOCKS.location());
 
 	private static final TagKey<Block> IRON_DOOR_KEY_OPENABLE = TagKey.create(Registries.BLOCK,
-			ResourceLocation.parse("irondoorkey:openable"));
+			Identifier.parse("irondoorkey:openable"));
 
 
 	@Override public void onInitializeDataGenerator(FabricDataGenerator dataGenerator)
@@ -298,14 +298,14 @@ public class MetalFencesDatagen implements DataGeneratorEntrypoint
 			modelGenerator.blockStateOutput.accept(BlockModelGenerators.createFence(block, fencePost, fenceSide));
 			modelGenerator.blockStateOutput.accept(BlockModelGenerators.createFence(waxedBlock, fencePost, fenceSide));
 
-			ResourceLocation fenceInventory = ModelTemplates.FENCE_INVENTORY.create(block, textureMapping, modelGenerator.modelOutput);
+			Identifier fenceInventory = ModelTemplates.FENCE_INVENTORY.create(block, textureMapping, modelGenerator.modelOutput);
 			modelGenerator.registerSimpleItemModel(block, fenceInventory);
 			modelGenerator.registerSimpleItemModel(waxedBlock, fenceInventory);
 		}
 
 		public void addCopperFenceGates(Block block, Block waxedBlock)
 		{
-			ResourceLocation gateClosedId = ModelTemplates.FENCE_GATE_CLOSED.create(block, textureMapping, modelGenerator.modelOutput);
+			Identifier gateClosedId = ModelTemplates.FENCE_GATE_CLOSED.create(block, textureMapping, modelGenerator.modelOutput);
 			MultiVariant gateOpen = BlockModelGenerators.plainVariant(ModelTemplates.FENCE_GATE_OPEN.create(block, textureMapping, modelGenerator.modelOutput));
 			MultiVariant gateClosed = BlockModelGenerators.plainVariant(gateClosedId);
 			MultiVariant gateWallOpen = BlockModelGenerators.plainVariant(ModelTemplates.FENCE_GATE_WALL_OPEN.create(block, textureMapping, modelGenerator.modelOutput));
