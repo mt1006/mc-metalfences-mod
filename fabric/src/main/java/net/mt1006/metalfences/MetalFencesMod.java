@@ -4,8 +4,8 @@ import com.google.common.collect.BiMap;
 import com.google.common.collect.ImmutableBiMap;
 import com.mojang.datafixers.util.Pair;
 import net.fabricmc.api.ModInitializer;
-import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroupEntries;
-import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
+import net.fabricmc.fabric.api.creativetab.v1.CreativeModeTabEvents;
+import net.fabricmc.fabric.api.creativetab.v1.FabricCreativeModeTabOutput;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
@@ -90,7 +90,7 @@ public class MetalFencesMod extends MetalFencesBlockAccessor implements ModIniti
 		}
 		toRegister.clear();
 
-		ItemGroupEvents.modifyEntriesEvent(CreativeModeTabs.BUILDING_BLOCKS).register(this::addToCreativeTab);
+		CreativeModeTabEvents.modifyOutputEvent(CreativeModeTabs.BUILDING_BLOCKS).register(this::addToCreativeTab);
 	}
 
 	private static Block register(String idStr, Function<BlockBehaviour.Properties, Block> blockSupplier, BlockBehaviour.Properties properties, Item nextInTab)
@@ -109,9 +109,9 @@ public class MetalFencesMod extends MetalFencesBlockAccessor implements ModIniti
 		return register(id, blockSupplier, BlockBehaviour.Properties.ofFullCopy(copyFrom), nextInTab);
 	}
 
-	private void addToCreativeTab(FabricItemGroupEntries entries)
+	private void addToCreativeTab(FabricCreativeModeTabOutput entries)
 	{
-		creativeTabPairs.forEach((pair) -> entries.addBefore(pair.getSecond(), pair.getFirst()));
+		creativeTabPairs.forEach((pair) -> entries.insertBefore(pair.getSecond(), pair.getFirst()));
 	}
 
 	@Override public @Nullable Block getNextWeathered(Block block)

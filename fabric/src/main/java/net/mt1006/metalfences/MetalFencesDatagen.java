@@ -4,16 +4,17 @@ import com.google.common.collect.Iterables;
 import net.fabricmc.fabric.api.client.datagen.v1.provider.FabricModelProvider;
 import net.fabricmc.fabric.api.datagen.v1.DataGeneratorEntrypoint;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator;
-import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
-import net.fabricmc.fabric.api.datagen.v1.provider.FabricBlockLootTableProvider;
+import net.fabricmc.fabric.api.datagen.v1.FabricPackOutput;
+import net.fabricmc.fabric.api.datagen.v1.provider.FabricBlockLootSubProvider;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricRecipeProvider;
-import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider;
+import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagsProvider;
 import net.minecraft.client.data.models.BlockModelGenerators;
 import net.minecraft.client.data.models.ItemModelGenerators;
 import net.minecraft.client.data.models.MultiVariant;
 import net.minecraft.client.data.models.model.ModelTemplates;
 import net.minecraft.client.data.models.model.TextureMapping;
 import net.minecraft.client.data.models.model.TextureSlot;
+import net.minecraft.client.resources.model.sprite.Material;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
@@ -86,7 +87,7 @@ public class MetalFencesDatagen implements DataGeneratorEntrypoint
 
 	private static class RecipeGenerator extends FabricRecipeProvider
 	{
-		public RecipeGenerator(FabricDataOutput output, CompletableFuture<HolderLookup.Provider> registriesFuture)
+		public RecipeGenerator(FabricPackOutput output, CompletableFuture<HolderLookup.Provider> registriesFuture)
 		{
 			super(output, registriesFuture);
 		}
@@ -152,9 +153,9 @@ public class MetalFencesDatagen implements DataGeneratorEntrypoint
 		}
 	}
 
-	private static class LootTableGenerator extends FabricBlockLootTableProvider
+	private static class LootTableGenerator extends FabricBlockLootSubProvider
 	{
-		protected LootTableGenerator(FabricDataOutput dataOutput, CompletableFuture<HolderLookup.Provider> registryLookup)
+		protected LootTableGenerator(FabricPackOutput dataOutput, CompletableFuture<HolderLookup.Provider> registryLookup)
 		{
 			super(dataOutput, registryLookup);
 		}
@@ -168,9 +169,9 @@ public class MetalFencesDatagen implements DataGeneratorEntrypoint
 		}
 	}
 
-	private static class BlockTagGenerator extends FabricTagProvider.BlockTagProvider
+	private static class BlockTagGenerator extends FabricTagsProvider.BlockTagsProvider
 	{
-		public BlockTagGenerator(FabricDataOutput output, CompletableFuture<HolderLookup.Provider> registriesFuture)
+		public BlockTagGenerator(FabricPackOutput output, CompletableFuture<HolderLookup.Provider> registriesFuture)
 		{
 			super(output, registriesFuture);
 		}
@@ -205,9 +206,9 @@ public class MetalFencesDatagen implements DataGeneratorEntrypoint
 		}
 	}
 
-	private static class ItemTagGenerator extends FabricTagProvider.ItemTagProvider
+	private static class ItemTagGenerator extends FabricTagsProvider.ItemTagsProvider
 	{
-		public ItemTagGenerator(FabricDataOutput output, CompletableFuture<HolderLookup.Provider> completableFuture)
+		public ItemTagGenerator(FabricPackOutput output, CompletableFuture<HolderLookup.Provider> completableFuture)
 		{
 			super(output, completableFuture);
 		}
@@ -235,7 +236,7 @@ public class MetalFencesDatagen implements DataGeneratorEntrypoint
 
 	private static class ModelGenerator extends FabricModelProvider
 	{
-		private ModelGenerator(FabricDataOutput generator)
+		private ModelGenerator(FabricPackOutput generator)
 		{
 			super(generator);
 		}
@@ -276,7 +277,7 @@ public class MetalFencesDatagen implements DataGeneratorEntrypoint
 			this.modelGenerator = modelGenerator;
 
 			textureMapping = new TextureMapping();
-			textureMapping.put(TextureSlot.TEXTURE, BuiltInRegistries.BLOCK.getKey(block).withPrefix(BLOCK_PREFIX));
+			textureMapping.put(TextureSlot.TEXTURE, new Material(BuiltInRegistries.BLOCK.getKey(block).withPrefix(BLOCK_PREFIX)));
 			familyProvider = modelGenerator.new BlockFamilyProvider(textureMapping);
 		}
 
