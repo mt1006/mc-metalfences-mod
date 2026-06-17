@@ -23,6 +23,7 @@ import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.data.recipes.RecipeProvider;
 import net.minecraft.data.tags.TagAppender;
 import net.minecraft.resources.Identifier;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
@@ -178,29 +179,29 @@ public class MetalFencesDatagen implements DataGeneratorEntrypoint
 
 		@Override protected void addTags(HolderLookup.Provider provider)
 		{
-			TagAppender<Block, Block> copperFenceBlocks = valueLookupBuilder(COPPER_FENCE_BLOCKS);
-			COPPER_FENCES.forEach(copperFenceBlocks::add);
+			TagAppender<Block> copperFenceBlocks = builder(COPPER_FENCE_BLOCKS);
+			COPPER_FENCES.forEach((block) -> copperFenceBlocks.add(getKey(block)));
 
-			TagAppender<Block, Block> copperFenceGateBlocks = valueLookupBuilder(COPPER_FENCE_GATE_BLOCKS);
-			COPPER_FENCE_GATES.forEach(copperFenceGateBlocks::add);
+			TagAppender<Block> copperFenceGateBlocks = builder(COPPER_FENCE_GATE_BLOCKS);
+			COPPER_FENCE_GATES.forEach((block) -> copperFenceGateBlocks.add(getKey(block)));
 
-			TagAppender<Block, Block> metalFenceBlocks = valueLookupBuilder(METAL_FENCE_BLOCKS);
-			metalFenceBlocks.add(MetalFencesMod.IRON_FENCE);
+			TagAppender<Block> metalFenceBlocks = builder(METAL_FENCE_BLOCKS);
+			metalFenceBlocks.add(getKey(MetalFencesMod.IRON_FENCE));
 			metalFenceBlocks.addOptionalTag(COPPER_FENCE_BLOCKS);
 
-			TagAppender<Block, Block> metalFenceGateBlocks = valueLookupBuilder(METAL_FENCE_GATE_BLOCKS);
-			metalFenceGateBlocks.add(MetalFencesMod.IRON_FENCE_GATE);
+			TagAppender<Block> metalFenceGateBlocks = builder(METAL_FENCE_GATE_BLOCKS);
+			metalFenceGateBlocks.add(getKey(MetalFencesMod.IRON_FENCE_GATE));
 			metalFenceGateBlocks.addOptionalTag(COPPER_FENCE_GATE_BLOCKS);
 
-			valueLookupBuilder(BlockTags.FENCES).addOptionalTag(METAL_FENCE_BLOCKS);
-			valueLookupBuilder(BlockTags.FENCE_GATES).addOptionalTag(METAL_FENCE_GATE_BLOCKS);
-			valueLookupBuilder(IRON_DOOR_KEY_OPENABLE).add(MetalFencesMod.IRON_FENCE_GATE);
+			builder(BlockTags.FENCES).addOptionalTag(METAL_FENCE_BLOCKS);
+			builder(BlockTags.FENCE_GATES).addOptionalTag(METAL_FENCE_GATE_BLOCKS);
+			builder(IRON_DOOR_KEY_OPENABLE).add(getKey(MetalFencesMod.IRON_FENCE_GATE));
 
-			TagAppender<Block, Block> mineableWithPickaxe = valueLookupBuilder(BlockTags.MINEABLE_WITH_PICKAXE);
+			TagAppender<Block> mineableWithPickaxe = builder(BlockTags.MINEABLE_WITH_PICKAXE);
 			mineableWithPickaxe.addOptionalTag(METAL_FENCE_BLOCKS);
 			mineableWithPickaxe.addOptionalTag(METAL_FENCE_GATE_BLOCKS);
 
-			TagAppender<Block, Block> needsStoneTool = valueLookupBuilder(BlockTags.NEEDS_STONE_TOOL);
+			TagAppender<Block> needsStoneTool = builder(BlockTags.NEEDS_STONE_TOOL);
 			needsStoneTool.addOptionalTag(COPPER_FENCE_BLOCKS);
 			needsStoneTool.addOptionalTag(COPPER_FENCE_GATE_BLOCKS);
 		}
@@ -215,22 +216,21 @@ public class MetalFencesDatagen implements DataGeneratorEntrypoint
 
 		@Override protected void addTags(HolderLookup.Provider provider)
 		{
-			TagAppender<Item, Item> copperFenceItems = valueLookupBuilder(COPPER_FENCE_ITEMS);
-			COPPER_FENCES.forEach((block) -> copperFenceItems.add(block.asItem()));
+			TagAppender<Item> copperFenceItems = builder(COPPER_FENCE_ITEMS);
+			COPPER_FENCES.forEach((block) -> copperFenceItems.add(getKey(block.asItem())));
 
-			TagAppender<Item, Item> copperFenceGateItems = valueLookupBuilder(COPPER_FENCE_GATE_ITEMS);
-			COPPER_FENCE_GATES.forEach((block) -> copperFenceGateItems.add(block.asItem()));
+			TagAppender<Item> copperFenceGateItems = builder(COPPER_FENCE_GATE_ITEMS);
+			COPPER_FENCE_GATES.forEach((block) -> copperFenceGateItems.add(getKey(block.asItem())));
 
-			TagAppender<Item, Item> metalFenceItems = valueLookupBuilder(METAL_FENCE_ITEMS);
-			metalFenceItems.add(MetalFencesMod.IRON_FENCE.asItem());
+			TagAppender<Item> metalFenceItems = builder(METAL_FENCE_ITEMS);
+			metalFenceItems.add(getKey(MetalFencesMod.IRON_FENCE.asItem()));
 			metalFenceItems.addOptionalTag(COPPER_FENCE_ITEMS);
 
-			TagAppender<Item, Item> metalFenceGateItems = valueLookupBuilder(METAL_FENCE_GATE_ITEMS);
-			metalFenceGateItems.add(MetalFencesMod.IRON_FENCE_GATE.asItem());
+			TagAppender<Item> metalFenceGateItems = builder(METAL_FENCE_GATE_ITEMS);
+			metalFenceGateItems.add(getKey(MetalFencesMod.IRON_FENCE_GATE.asItem()));
 			metalFenceGateItems.addOptionalTag(COPPER_FENCE_GATE_ITEMS);
 
-			valueLookupBuilder(ItemTags.FENCES).addOptionalTag(METAL_FENCE_ITEMS);
-			valueLookupBuilder(ItemTags.FENCE_GATES).addOptionalTag(METAL_FENCE_GATE_ITEMS);
+			builder(ItemTags.FENCE_GATES).addOptionalTag(METAL_FENCE_GATE_ITEMS);
 		}
 	}
 
@@ -245,10 +245,10 @@ public class MetalFencesDatagen implements DataGeneratorEntrypoint
 		{
 			ModBlockModelFamily ironFamily = new ModBlockModelFamily(modelGenerator, Blocks.IRON_BLOCK);
 			List<ModBlockModelFamily> copperFamilies = List.of(
-					new ModBlockModelFamily(modelGenerator, Blocks.COPPER_BLOCK),
-					new ModBlockModelFamily(modelGenerator, Blocks.EXPOSED_COPPER),
-					new ModBlockModelFamily(modelGenerator, Blocks.WEATHERED_COPPER),
-					new ModBlockModelFamily(modelGenerator, Blocks.OXIDIZED_COPPER));
+					new ModBlockModelFamily(modelGenerator, Blocks.COPPER_BLOCK.weathering().unaffected()),
+					new ModBlockModelFamily(modelGenerator, Blocks.COPPER_BLOCK.weathering().exposed()),
+					new ModBlockModelFamily(modelGenerator, Blocks.COPPER_BLOCK.weathering().weathered()),
+					new ModBlockModelFamily(modelGenerator, Blocks.COPPER_BLOCK.weathering().oxidized()));
 
 			ironFamily.addIronFence(MetalFencesMod.IRON_FENCE);
 			ironFamily.addIronFenceGate(MetalFencesMod.IRON_FENCE_GATE);
@@ -320,5 +320,15 @@ public class MetalFencesDatagen implements DataGeneratorEntrypoint
 			modelGenerator.registerSimpleItemModel(block, gateClosedId);
 			modelGenerator.registerSimpleItemModel(waxedBlock, gateClosedId);
 		}
+	}
+
+	private static ResourceKey<Block> getKey(Block block)
+	{
+		return BuiltInRegistries.BLOCK.getResourceKey(block).orElseThrow();
+	}
+
+	private static ResourceKey<Item> getKey(Item item)
+	{
+		return BuiltInRegistries.ITEM.getResourceKey(item).orElseThrow();
 	}
 }

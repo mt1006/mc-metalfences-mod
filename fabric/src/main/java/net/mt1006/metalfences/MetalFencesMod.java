@@ -39,23 +39,23 @@ public class MetalFencesMod extends MetalFencesBlockAccessor implements ModIniti
 			BlockBehaviour.Properties.of().mapColor(MapColor.METAL).requiresCorrectToolForDrops().strength(4.0f, 5.0f).sound(SoundType.METAL), Items.IRON_DOOR);
 
 	public static final Block COPPER_FENCE = register("copper_fence", (props) -> new WeatheringCopperFenceBlock(WeatheringCopper.WeatherState.UNAFFECTED, props),
-			BlockBehaviour.Properties.of().mapColor(Blocks.COPPER_BLOCK.defaultMapColor()).strength(3.0f, 6.0f).requiresCorrectToolForDrops().sound(SoundType.COPPER), Items.COPPER_DOOR);
-	public static final Block EXPOSED_COPPER_FENCE = register("exposed_copper_fence", (props) -> new WeatheringCopperFenceBlock(WeatheringCopper.WeatherState.EXPOSED, props), COPPER_FENCE, Items.EXPOSED_COPPER_DOOR);
-	public static final Block WEATHERED_COPPER_FENCE = register("weathered_copper_fence", (props) -> new WeatheringCopperFenceBlock(WeatheringCopper.WeatherState.WEATHERED, props), COPPER_FENCE, Items.WEATHERED_COPPER_DOOR);
-	public static final Block OXIDIZED_COPPER_FENCE = register("oxidized_copper_fence", (props) -> new WeatheringCopperFenceBlock(WeatheringCopper.WeatherState.OXIDIZED, props), COPPER_FENCE, Items.OXIDIZED_COPPER_DOOR);
-	public static final Block WAXED_COPPER_FENCE = register("waxed_copper_fence", WaxedCopperFenceBlock::new, COPPER_FENCE, Items.WAXED_COPPER_DOOR);
-	public static final Block WAXED_EXPOSED_COPPER_FENCE = register("waxed_exposed_copper_fence", WaxedCopperFenceBlock::new, COPPER_FENCE, Items.WAXED_EXPOSED_COPPER_DOOR);
-	public static final Block WAXED_WEATHERED_COPPER_FENCE = register("waxed_weathered_copper_fence", WaxedCopperFenceBlock::new, COPPER_FENCE, Items.WAXED_WEATHERED_COPPER_DOOR);
-	public static final Block WAXED_OXIDIZED_COPPER_FENCE = register("waxed_oxidized_copper_fence", WaxedCopperFenceBlock::new, COPPER_FENCE, Items.WAXED_OXIDIZED_COPPER_DOOR);
+			BlockBehaviour.Properties.of().mapColor(Blocks.COPPER_BLOCK.weathering().unaffected().defaultMapColor()).strength(3.0f, 6.0f).requiresCorrectToolForDrops().sound(SoundType.COPPER), Items.COPPER_DOOR.weathering().unaffected());
+	public static final Block EXPOSED_COPPER_FENCE = register("exposed_copper_fence", (props) -> new WeatheringCopperFenceBlock(WeatheringCopper.WeatherState.EXPOSED, props), COPPER_FENCE, Items.COPPER_DOOR.weathering().exposed());
+	public static final Block WEATHERED_COPPER_FENCE = register("weathered_copper_fence", (props) -> new WeatheringCopperFenceBlock(WeatheringCopper.WeatherState.WEATHERED, props), COPPER_FENCE, Items.COPPER_DOOR.weathering().weathered());
+	public static final Block OXIDIZED_COPPER_FENCE = register("oxidized_copper_fence", (props) -> new WeatheringCopperFenceBlock(WeatheringCopper.WeatherState.OXIDIZED, props), COPPER_FENCE, Items.COPPER_DOOR.weathering().oxidized());
+	public static final Block WAXED_COPPER_FENCE = register("waxed_copper_fence", WaxedCopperFenceBlock::new, COPPER_FENCE, Items.COPPER_DOOR.waxed().unaffected());
+	public static final Block WAXED_EXPOSED_COPPER_FENCE = register("waxed_exposed_copper_fence", WaxedCopperFenceBlock::new, COPPER_FENCE, Items.COPPER_DOOR.waxed().exposed());
+	public static final Block WAXED_WEATHERED_COPPER_FENCE = register("waxed_weathered_copper_fence", WaxedCopperFenceBlock::new, COPPER_FENCE, Items.COPPER_DOOR.waxed().weathered());
+	public static final Block WAXED_OXIDIZED_COPPER_FENCE = register("waxed_oxidized_copper_fence", WaxedCopperFenceBlock::new, COPPER_FENCE, Items.COPPER_DOOR.waxed().oxidized());
 
-	public static final Block COPPER_FENCE_GATE = register("copper_fence_gate", (props) -> new WeatheringCopperFenceGateBlock(WeatheringCopper.WeatherState.UNAFFECTED, props), COPPER_FENCE, Items.COPPER_DOOR);
-	public static final Block EXPOSED_COPPER_FENCE_GATE = register("exposed_copper_fence_gate", (props) -> new WeatheringCopperFenceGateBlock(WeatheringCopper.WeatherState.EXPOSED, props), COPPER_FENCE, Items.EXPOSED_COPPER_DOOR);
-	public static final Block WEATHERED_COPPER_FENCE_GATE = register("weathered_copper_fence_gate", (props) -> new WeatheringCopperFenceGateBlock(WeatheringCopper.WeatherState.WEATHERED, props), COPPER_FENCE, Items.WEATHERED_COPPER_DOOR);
-	public static final Block OXIDIZED_COPPER_FENCE_GATE = register("oxidized_copper_fence_gate", (props) -> new WeatheringCopperFenceGateBlock(WeatheringCopper.WeatherState.OXIDIZED, props), COPPER_FENCE, Items.OXIDIZED_COPPER_DOOR);
-	public static final Block WAXED_COPPER_FENCE_GATE = register("waxed_copper_fence_gate", WaxedCopperFenceGateBlock::new, COPPER_FENCE, Items.WAXED_COPPER_DOOR);
-	public static final Block WAXED_EXPOSED_COPPER_FENCE_GATE = register("waxed_exposed_copper_fence_gate", WaxedCopperFenceGateBlock::new, COPPER_FENCE, Items.WAXED_EXPOSED_COPPER_DOOR);
-	public static final Block WAXED_WEATHERED_COPPER_FENCE_GATE = register("waxed_weathered_copper_fence_gate", WaxedCopperFenceGateBlock::new, COPPER_FENCE, Items.WAXED_WEATHERED_COPPER_DOOR);
-	public static final Block WAXED_OXIDIZED_COPPER_FENCE_GATE = register("waxed_oxidized_copper_fence_gate", WaxedCopperFenceGateBlock::new, COPPER_FENCE, Items.WAXED_OXIDIZED_COPPER_DOOR);
+	public static final Block COPPER_FENCE_GATE = register("copper_fence_gate", (props) -> new WeatheringCopperFenceGateBlock(WeatheringCopper.WeatherState.UNAFFECTED, props), COPPER_FENCE, Items.COPPER_DOOR.weathering().unaffected());
+	public static final Block EXPOSED_COPPER_FENCE_GATE = register("exposed_copper_fence_gate", (props) -> new WeatheringCopperFenceGateBlock(WeatheringCopper.WeatherState.EXPOSED, props), COPPER_FENCE, Items.COPPER_DOOR.weathering().exposed());
+	public static final Block WEATHERED_COPPER_FENCE_GATE = register("weathered_copper_fence_gate", (props) -> new WeatheringCopperFenceGateBlock(WeatheringCopper.WeatherState.WEATHERED, props), COPPER_FENCE, Items.COPPER_DOOR.weathering().weathered());
+	public static final Block OXIDIZED_COPPER_FENCE_GATE = register("oxidized_copper_fence_gate", (props) -> new WeatheringCopperFenceGateBlock(WeatheringCopper.WeatherState.OXIDIZED, props), COPPER_FENCE, Items.COPPER_DOOR.weathering().oxidized());
+	public static final Block WAXED_COPPER_FENCE_GATE = register("waxed_copper_fence_gate", WaxedCopperFenceGateBlock::new, COPPER_FENCE, Items.COPPER_DOOR.waxed().unaffected());
+	public static final Block WAXED_EXPOSED_COPPER_FENCE_GATE = register("waxed_exposed_copper_fence_gate", WaxedCopperFenceGateBlock::new, COPPER_FENCE, Items.COPPER_DOOR.waxed().exposed());
+	public static final Block WAXED_WEATHERED_COPPER_FENCE_GATE = register("waxed_weathered_copper_fence_gate", WaxedCopperFenceGateBlock::new, COPPER_FENCE, Items.COPPER_DOOR.waxed().weathered());
+	public static final Block WAXED_OXIDIZED_COPPER_FENCE_GATE = register("waxed_oxidized_copper_fence_gate", WaxedCopperFenceGateBlock::new, COPPER_FENCE, Items.COPPER_DOOR.waxed().oxidized());
 
 
 	public static final BiMap<Block, Block> WEATHERING = ImmutableBiMap.of(
