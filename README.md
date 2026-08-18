@@ -1,3 +1,11 @@
+## THIS REPOSITORY HAS BEEN MOVED TO CODEBERG
+
+### New repository: https://codeberg.org/mt1006/mc-metalfences-mod
+
+### Issue tracker: https://codeberg.org/mt1006/mc-metalfences-mod/issues
+
+
+
 # About
 **Metal Fences** is a Minecraft mod adding iron and copper variants of fences and fence gates. They have similar properties to other metal blocks: iron fence gate cannot be opened by hand, while copper variants oxidize and can be waxed.
 
